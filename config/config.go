@@ -27,6 +27,18 @@ func NewDatabaseConfig() *DatabaseConfig {
 	}
 }
 
+type LogConfig struct {
+	Level  int
+	Format string
+}
+
+func NewLogConfig() *LogConfig {
+	return &LogConfig{
+		Level:  GetEnv("LOG_LEVEL", 0),
+		Format: GetEnv("LOG_FORMAT", "json"),
+	}
+}
+
 func tryConvert[T any](value string) (T, bool) {
 	var zero T
 
