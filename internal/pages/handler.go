@@ -20,6 +20,18 @@ func NewHandler(router fiber.Router, customLogger *slog.Logger) {
 }
 
 func (h *PagesHandler) home(c *fiber.Ctx) error {
-	h.customLogger.Info("This is Home Page")
-	return c.SendString("Hello")
+	tags := []string{
+		"Еда",
+		"Животные",
+		"Машины",
+		"Спорт",
+		"Музыка",
+		"Технологии",
+		"Прочее",
+	}
+
+	data := struct {
+		Tags []string
+	}{Tags: tags}
+	return c.Render("tags", data)
 }
