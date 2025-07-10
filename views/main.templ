@@ -1,0 +1,12 @@
+package views
+
+import "fiber-dz/views/layout"
+
+templ Main() {
+	@layout.Layout(layout.LayoutProps{
+		Title:           "Просто сайт",
+		MetaDescription: "Просто сайт"})
+	<main>
+		Main
+	</main>
+}

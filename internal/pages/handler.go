@@ -1,9 +1,12 @@
 package pages
 
 import (
+	"fiber-dz/views"
 	"log/slog"
 
 	"github.com/gofiber/fiber/v2"
+
+	templeadapter "fiber-dz/pkg/templ_adapter"
 )
 
 type PagesHandler struct {
@@ -20,18 +23,20 @@ func NewHandler(router fiber.Router, customLogger *slog.Logger) {
 }
 
 func (h *PagesHandler) home(c *fiber.Ctx) error {
-	tags := []string{
-		"Еда",
-		"Животные",
-		"Машины",
-		"Спорт",
-		"Музыка",
-		"Технологии",
-		"Прочее",
-	}
+	// tags := []string{
+	// 	"Еда",
+	// 	"Животные",
+	// 	"Машины",
+	// 	"Спорт",
+	// 	"Музыка",
+	// 	"Технологии",
+	// 	"Прочее",
+	// }
+	//
+	// _ := struct {
+	// 	Tags []string
+	// }{Tags: tags}
+	component := views.Main()
 
-	data := struct {
-		Tags []string
-	}{Tags: tags}
-	return c.Render("tags", data)
+	return templeadapter.Render(c, component)
 }
