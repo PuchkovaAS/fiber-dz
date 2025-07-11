@@ -23,20 +23,42 @@ func NewHandler(router fiber.Router, customLogger *slog.Logger) {
 }
 
 func (h *PagesHandler) home(c *fiber.Ctx) error {
-	// tags := []string{
-	// 	"Еда",
-	// 	"Животные",
-	// 	"Машины",
-	// 	"Спорт",
-	// 	"Музыка",
-	// 	"Технологии",
-	// 	"Прочее",
-	// }
-	//
-	// _ := struct {
-	// 	Tags []string
-	// }{Tags: tags}
-	component := views.Main()
+	tags := []views.TagData{
+		{
+			Name:    "Еда",
+			PathImg: "./public/images/food/01.png",
+		},
+		{
+			Name:    "Животные",
+			PathImg: "/public/images/animal/10.png",
+		},
+
+		{
+			Name:    "Машины",
+			PathImg: "/public/images/car/04.png",
+		},
+
+		{
+			Name:    "Спорт",
+			PathImg: "/public/images/sport/06.png",
+		},
+
+		{
+			Name:    "Музыка",
+			PathImg: "/public/images/music/06.png",
+		},
+
+		{
+			Name:    "Технологии",
+			PathImg: "/public/images/technology/03.png",
+		},
+
+		{
+			Name:    "Прочее",
+			PathImg: "/public/images/abstract/07.png",
+		},
+	}
+	component := views.Main(tags)
 
 	return templeadapter.Render(c, component)
 }

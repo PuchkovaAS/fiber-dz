@@ -1,7 +1,10 @@
 :root {
     --color-primary: #309689;
     --color-primary-hover: #1c786b;
+    --color-tag: rgba(245, 245, 245, 1.00);
 }
+
+
 
 body {
     margin: 0;

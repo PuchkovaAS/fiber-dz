@@ -1,12 +1,23 @@
 package views
 
 import "fiber-dz/views/layout"
+import "fiber-dz/views/components"
 
-templ Main() {
+type TagData struct {
+	Name    string
+	PathImg string
+}
+
+templ Main(tags []TagData) {
 	@layout.Layout(layout.LayoutProps{
 		Title:           "Просто сайт",
 		MetaDescription: "Просто сайт"})
 	<main>
 		Main
+		@layout.TagPanel() {
+			for _, tag := range tags {
+				@components.Tag(tag.Name, tag.PathImg)
+			}
+		}
 	</main>
 }
