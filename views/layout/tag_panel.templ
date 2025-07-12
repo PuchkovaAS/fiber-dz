@@ -1,0 +1,82 @@
+package layout
+
+templ TagPanel() {
+	@TagPanelStyle()
+	<div class="tag-panel">
+		<div class="tags-wrapper">
+			<div class="tags-scroller">
+				{ children... }
+			</div>
+		</div>
+		<div class="arrow">
+			<svg class="arrow-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+				<path d="M9 18L15 12L9 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+			</svg>
+		</div>
+	</div>
+}
+
+templ TagPanelStyle() {
+	<style>
+        .tag-panel {
+            --panel-padding: 20px;
+            width: 100%;
+            max-width: 1512px;
+            height: 68px;
+            margin: 0 auto;
+            background: var(--color-tag);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            position: relative;
+            padding: 0 var(--panel-padding);
+            box-sizing: border-box;
+        }
+
+        .tags-wrapper {
+            flex: 1;
+            overflow: hidden;
+            position: relative;
+            height: 100%;
+            display: flex;
+            align-items: center;
+        }
+
+        .tags-scroller {
+            display: flex;
+            gap: 24px;
+            height: 100%;
+            align-items: center;
+            overflow-x: auto;
+            scrollbar-width: none; /* Firefox */
+            width: calc(100% - 44px); /* 24px arrow + 20px padding */
+        }
+
+        .tags-scroller::-webkit-scrollbar {
+            display: none; /* Chrome/Safari */
+        }
+
+        .arrow {
+            width: 24px;
+            height: 24px;
+            margin-left: auto;
+            flex-shrink: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+        }
+
+        .arrow-icon {
+            width: 100%;
+            height: 100%;
+            color: black;
+            transition: all 0.2s ease;
+        }
+
+        .arrow:hover .arrow-icon {
+            transform: translateX(2px);
+            color: #555;
+        }
+    </style>
+}

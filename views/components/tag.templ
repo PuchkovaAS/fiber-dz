@@ -1,0 +1,81 @@
+package components
+
+templ Tag(tagName string, tagPath string, linkURL string) {
+	<a href={ linkURL } class="tag-link">
+		<div class="tag-container">
+			<div class="tag-background" style={ "background-image: url(" + tagPath + ")" }></div>
+			<span class="tag-text">#{ tagName }</span>
+		</div>
+	</a>
+	@TagStyle()
+}
+
+templ TagStyle() {
+	<style>
+        .tag-link {
+            display: inline-block; /* Для корректного отображения */
+            text-decoration: none; /* Убираем подчеркивание */
+            color: inherit; /* Наследуем цвет текста */
+        }
+        
+        .tag-container {
+            position: relative;
+            width: 170px;
+            height: 48px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            background-color: rgba(0,0,0,0.3);
+            transition: transform 0.2s ease, box-shadow 0.2s ease; /* Анимация при наведении */
+            cursor: pointer; /* Меняем курсор */
+ font-family: "AgH5", sans-serif; 
+ font-size: 16px; /* Размер как в H5 */
+            letter-spacing: 0.5px; /* Характерный для AgH5 интервал */
+            transition: color 0.2s ease;
+        }
+        
+
+        .tag-container:hover {
+            transform: translateY(-2px); /* Эффект приподнимания */
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2); /* Тень при наведении */
+        }
+
+        .tag-background {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            opacity: 0.7;
+            z-index: 1;
+            transition: opacity 0.2s ease; /* Плавное изменение прозрачности */
+        }
+
+        .tag-container:hover .tag-background {
+            opacity: 0.9; /* Увеличиваем прозрачность при наведении */
+        }
+
+        .tag-text {
+            position: relative;
+            color: white;
+            font-family: Roboto;
+            font-weight: 500;
+            font-size: 16px;
+            text-transform: capitalize;
+            z-index: 2;
+            text-shadow: 0 1px 3px rgba(0,0,0,0.8);
+            padding: 4px 8px;
+            transition: all 0.2s ease; /* Анимация текста */
+        }
+
+        .tag-container:hover .tag-text {
+            color: #fff; /* Яркий цвет при наведении */
+            text-shadow: 0 2px 4px rgba(0,0,0,0.9); /* Усиленная тень */
+        }
+    </style>
+}

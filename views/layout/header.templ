@@ -1,0 +1,124 @@
+package layout
+
+import "fiber-dz/views/components"
+
+templ Header() {
+	@HeaderStyle()
+	<header class="header">
+		<div class="header-left">
+			<!-- Текстовый логотип вместо картинки -->
+			<h2 class="logo">Новости</h2>
+			<!-- Навигация с выпадающим меню -->
+			<nav class="nav">
+				<div class="nav-item categories">
+					<span>Категории</span>
+					<span class="dropdown-icon">⌄</span>
+					<div class="dropdown-menu">
+						{ children... }
+					</div>
+				</div>
+				<a href="/contacts" class="nav-item">Контакты</a>
+			</nav>
+		</div>
+		<div class="header-right">
+			@components.SearchPanel()
+			@components.Auth()
+		</div>
+	</header>
+}
+
+templ HeaderStyle() {
+	<style>
+        /* Базовые стили */
+        .header {
+ margin: 0 auto;
+            width: 100%;
+            max-width: 1512px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 5%;
+            background-color: #fff;
+        }
+        
+        /* Логотип */
+        .logo {
+            color: #ff0000; /* Красный цвет */
+          font-family: "Roboto", sans-serif;
+            font-size: 22px;
+            font-weight: 700; /* Bold */
+            margin: 0;
+            text-decoration: none;
+            line-height: 1.2;
+        }
+        
+        /* Левая часть хедера */
+        .header-left {
+            display: flex;
+            align-items: center;
+            gap: 40px;
+
+ font-family: "AgH5", sans-serif; 
+ font-size: 16px; /* Размер как в H5 */
+            letter-spacing: 0.5px; /* Характерный для AgH5 интервал */
+            transition: color 0.2s ease;
+        }
+        
+        /* Навигация */
+        .nav {
+            display: flex;
+            gap: 25px;
+        }
+        
+        .nav-item {
+            position: relative;
+            color: #333;
+            text-decoration: none;
+            font-weight: 500;
+            padding: 8px 0;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+        
+        /* Выпадающее меню категорий */
+        .categories {
+            cursor: pointer;
+        }
+        
+        .categories:hover .dropdown-menu {
+            display: block;
+        }
+        
+        .dropdown-menu {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background: #fff;
+            border-radius: 8px;
+border: 1px solid #e0e0e0; 
+            min-width: 200px;
+            padding: 10px 0;
+            z-index: 100;
+        }
+        
+        
+        /* Правая часть хедера */
+        .header-right {
+            display: flex;
+            align-items: center;
+            gap: 25px;
+        }
+        
+        /* Анимации */
+        .dropdown-icon {
+            transition: transform 0.3s ease;
+        }
+        
+        .categories:hover .dropdown-icon {
+            transform: rotate(180deg);
+        }
+        
+    </style>
+}

@@ -3,6 +3,7 @@ module fiber-dz
 go 1.24.4
 
 require (
+	github.com/a-h/templ v0.3.906
 	github.com/gofiber/fiber/v2 v2.52.8
 	github.com/gofiber/template/html/v2 v2.1.3
 	github.com/joho/godotenv v1.5.1
@@ -23,5 +24,5 @@ require (
 	github.com/valyala/fasthttp v1.59.0 // indirect
 	go.opentelemetry.io/otel v1.29.0 // indirect
 	go.opentelemetry.io/otel/trace v1.29.0 // indirect
-	golang.org/x/sys v0.30.0 // indirect
+	golang.org/x/sys v0.32.0 // indirect
 )
