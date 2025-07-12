@@ -2,6 +2,10 @@
     --color-primary: #309689;
     --color-primary-hover: #1c786b;
     --color-tag: rgba(245, 245, 245, 1.00);
+    --color-text: rgba(62, 50, 50, 0.75);
+    --color-text-hover: rgba(62, 50, 50, 0.05);
+    --color-link: black;
+    --color-link-hover: red;
 }
 
 

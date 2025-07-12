@@ -6,6 +6,7 @@ import "fiber-dz/views/components"
 type TagData struct {
 	Name    string
 	PathImg string
+	Url     string
 }
 
 templ Main(tags []TagData) {
@@ -13,11 +14,16 @@ templ Main(tags []TagData) {
 		Title:           "Просто сайт",
 		MetaDescription: "Просто сайт"})
 	<main>
-		Main
-		@layout.TagPanel() {
+		@layout.Header() {
 			for _, tag := range tags {
-				@components.Tag(tag.Name, tag.PathImg)
+				@components.Category(tag.Name, tag.Url)
 			}
 		}
+		@layout.TagPanel() {
+			for _, tag := range tags {
+				@components.Tag(tag.Name, tag.PathImg, tag.Url)
+			}
+		}
+		@layout.Copyright()
 	</main>
 }

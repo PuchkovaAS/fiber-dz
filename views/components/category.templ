@@ -1,0 +1,23 @@
+package components
+
+templ Category(text, url string) {
+	@CategoryStyle()
+	<a href={ url } class="category-link">{ text }</a>
+}
+
+templ CategoryStyle() {
+	<style>
+
+        .category-link {
+            display: block;
+            padding: 8px 20px;
+            color: #333;
+            text-decoration: none;
+        }
+        
+        .category-link:hover {
+            background-color: #f5f5f5;
+            color: #ff0000;
+        }
+    </style>
+}

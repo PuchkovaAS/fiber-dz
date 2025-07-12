@@ -1,0 +1,35 @@
+package components
+
+templ Auth() {
+	@AuthStyle()
+	<div class="auth">
+		<a href="/login" class="auth-link">Вход</a>
+		<a href="/register" class="auth-link">Регистрация</a>
+	</div>
+}
+
+templ AuthStyle() {
+	<style>
+
+        .auth {
+            display: flex;
+            gap: 15px;
+ font-family: "AgH5", sans-serif; 
+        }
+        
+        .auth-link {
+            color: var(--color-link);
+            text-decoration: none;
+            font-weight: 500;
+ font-size: 16px; /* Размер как в H5 */
+            letter-spacing: 0.5px; /* Характерный для AgH5 интервал */
+            transition: color 0.2s ease;
+        }
+        
+        .auth-link:hover {
+            color: var(--color-link-hover);
+ text-decoration: underline; /* Добавляем подчеркивание при наведении */
+        }
+        
+        </style>
+}

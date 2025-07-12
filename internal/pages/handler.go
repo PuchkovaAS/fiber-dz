@@ -27,35 +27,43 @@ func (h *PagesHandler) home(c *fiber.Ctx) error {
 		{
 			Name:    "Еда",
 			PathImg: "./public/images/food/01.png",
+			Url:     "/",
 		},
 		{
 			Name:    "Животные",
 			PathImg: "/public/images/animal/10.png",
+			Url:     "/",
 		},
 
 		{
 			Name:    "Машины",
 			PathImg: "/public/images/car/04.png",
+
+			Url: "/",
 		},
 
 		{
 			Name:    "Спорт",
 			PathImg: "/public/images/sport/06.png",
+			Url:     "/",
 		},
 
 		{
 			Name:    "Музыка",
 			PathImg: "/public/images/music/06.png",
+			Url:     "/",
 		},
 
 		{
 			Name:    "Технологии",
 			PathImg: "/public/images/technology/03.png",
+			Url:     "/",
 		},
 
 		{
 			Name:    "Прочее",
 			PathImg: "/public/images/abstract/07.png",
+			Url:     "/",
 		},
 	}
 	component := views.Main(tags)
