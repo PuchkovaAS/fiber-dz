@@ -96,6 +96,17 @@ func Main(tags []TagData) templ.Component {
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
+		templ_7745c5c3_Err = components.Card(&components.CardInfo{
+			ImagePath:    "/public/images/sport/05.png",
+			Title:        "Открытие сезона байдарок",
+			AutorName:    "Михаил Аршинов",
+			AutorImgPath: "/public/images/avatar/12.png",
+			Text:         "Сегодня был открыт сезон путешествия на байдарках, где вы можете поучаствовать в ...",
+			Date:         "Август 18 , 2025",
+		}).Render(ctx, templ_7745c5c3_Buffer)
+		if templ_7745c5c3_Err != nil {
+			return templ_7745c5c3_Err
+		}
 		templ_7745c5c3_Err = layout.Copyright().Render(ctx, templ_7745c5c3_Buffer)
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
