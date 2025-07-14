@@ -32,6 +32,11 @@ templ Main(tags []TagData) {
 			Text:         "Сегодня был открыт сезон путешествия на байдарках, где вы можете поучаствовать в ...",
 			Date:         "Август 18 , 2025",
 		})
+		@components.TopTag(components.TagInfo{
+			Title:   "Как безопасно водить",
+			Text:    "Длинный текст про то, как можно безопасно водить автомобиль.",
+			ImgPath: "/public/images/car/05.png",
+		})
 		@layout.Copyright()
 	</main>
 }
