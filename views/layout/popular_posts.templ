@@ -1,0 +1,159 @@
+package layout
+
+templ PopularPostsLayout() {
+    @PopularPostsLayoutStyle()
+    <div class="popular-posts-panel">
+        <div class="popular-posts-wrapper">
+            <div class="popular-posts-header-section">
+                <div class="popular-posts-title-section">
+                    <div class="popular-posts-rectangle"></div>
+                    <h1 class="popular-posts-title">Популярное</h1>
+                </div>
+                <div class="popular-posts-arrow-slider">
+                    <div class="popular-posts-arrow popular-posts-arrow-left">
+                        <svg class="popular-posts-arrow-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M15 18L9 12L15 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+                        </svg>
+                    </div>
+                    <div class="popular-posts-arrow popular-posts-arrow-right">
+                        <svg class="popular-posts-arrow-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M9 18L15 12L9 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+                        </svg>
+                    </div>
+                </div>
+            </div>
+            <div class="popular-posts-scroller">
+                { children... }
+            </div>
+            <div class="popular-posts-footer">
+                <a href="#" class="popular-posts-all-link">Все новости</a>
+                <span class="popular-posts-counter">15/24.54</span>
+            </div>
+        </div>
+    </div>
+}
+
+templ PopularPostsLayoutStyle() {
+    <style>
+    .popular-posts-panel {
+        width: 100%;
+        padding: 20px 0;
+        overflow-x: hidden;
+        background: var(--color-background);
+        color: var(--color-text);
+    }
+
+    .popular-posts-wrapper {
+        width: 100%;
+        max-width: 1512px;
+        margin: 0 auto;
+        padding: 0 20px;
+    }
+
+    .popular-posts-header-section {
+        display: flex;
+        width: 100%;
+        align-items: center;
+        justify-content: space-between;
+        position: relative;
+        margin-bottom: 20px;
+    }
+
+    .popular-posts-title-section {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        position: relative;
+        flex: 0 0 auto;
+    }
+
+    .popular-posts-rectangle {
+        position: relative;
+        width: 4px;
+        height: 20px;
+        background-color: var(--color-primary);
+        border-radius: 12px;
+    }
+
+    .popular-posts-title {
+        position: relative;
+        width: fit-content;
+        font-family: var(--h4-font-family);
+        font-weight: var(--h4-font-weight);
+        color: var(--black);
+        font-size: var(--h4-font-size);
+        letter-spacing: var(--h4-letter-spacing);
+        line-height: var(--h4-line-height);
+        margin: 0;
+    }
+
+    .popular-posts-arrow-slider {
+        display: flex;
+        gap: 8px;
+    }
+
+    .popular-posts-arrow {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 32px;
+        height: 32px;
+        border-radius: 50%;
+        cursor: pointer;
+    }
+
+    .popular-posts-arrow-left {
+        opacity: 0.3;
+    }
+
+    .popular-posts-arrow-right {
+        background-color: rgba(0, 0, 0, 0.05);
+    }
+
+    .popular-posts-arrow-icon {
+        width: 24px;
+        height: 24px;
+    }
+
+    .popular-posts-scroller {
+        display: flex;
+        gap: 15px;
+        overflow-x: auto;
+        padding-bottom: 20px;
+        scrollbar-width: none;
+    }
+
+    .popular-posts-scroller::-webkit-scrollbar {
+        display: none;
+    }
+
+    .popular-posts-footer {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-top: 20px;
+        padding-top: 15px;
+        border-top: 1px solid var(--color-border);
+    }
+
+    .popular-posts-all-link {
+        font-weight: bold;
+        color: var(--color-primary);
+        text-decoration: none;
+    }
+
+    .popular-posts-all-link:hover {
+        text-decoration: underline;
+    }
+
+    .popular-posts-counter {
+        color: var(--color-text-secondary);
+        font-size: 0.9rem;
+    }
+
+    /* Чтобы карточки не сжимались */
+    .popular-posts-scroller > * {
+        flex: 0 0 auto;
+    }
+    </style>
+}

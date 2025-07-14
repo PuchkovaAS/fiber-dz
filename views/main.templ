@@ -24,19 +24,57 @@ templ Main(tags []TagData) {
 				@components.Tag(tag.Name, tag.PathImg, tag.Url)
 			}
 		}
-		@components.Card(&components.CardInfo{
-			ImagePath:    "/public/images/sport/05.png",
-			Title:        "Открытие сезона байдарок",
-			AutorName:    "Михаил Аршинов",
-			AutorImgPath: "/public/images/avatar/12.png",
-			Text:         "Сегодня был открыт сезон путешествия на байдарках, где вы можете поучаствовать в ...",
-			Date:         "Август 18 , 2025",
-		})
-		@components.TopTag(components.TagInfo{
-			Title:   "Как безопасно водить",
-			Text:    "Длинный текст про то, как можно безопасно водить автомобиль.",
-			ImgPath: "/public/images/car/05.png",
-		})
+		@layout.TopTagsLayout() {
+			@components.TopTag(components.TagInfo{
+				Title:   "Как безопасно водить",
+				Text:    "Длинный текст про то, как можно безопасно водить автомобиль.",
+				ImgPath: "/public/images/car/05.png",
+			})
+			@components.TopTag(components.TagInfo{
+				Title:   "Как безопасно водить",
+				Text:    "Длинный текст про то, как можно безопасно водить автомобиль.",
+				ImgPath: "/public/images/car/05.png",
+			})
+			@components.TopTag(components.TagInfo{
+				Title:   "Как безопасно водить",
+				Text:    "Длинный текст про то, как можно безопасно водить автомобиль.",
+				ImgPath: "/public/images/car/05.png",
+			})
+		}
+		@layout.PopularPostsLayout() {
+			@components.Card(&components.CardInfo{
+				ImagePath:    "/public/images/sport/05.png",
+				Title:        "Открытие сезона байдарок",
+				AutorName:    "Михаил Аршинов",
+				AutorImgPath: "/public/images/avatar/12.png",
+				Text:         "Сегодня был открыт сезон путешествия на байдарках, где вы можете поучаствовать в ...",
+				Date:         "Август 18 , 2025",
+			})
+			@components.Card(&components.CardInfo{
+				ImagePath:    "/public/images/sport/05.png",
+				Title:        "Открытие сезона байдарок",
+				AutorName:    "Михаил Аршинов",
+				AutorImgPath: "/public/images/avatar/12.png",
+				Text:         "Сегодня был открыт сезон путешествия на байдарках, где вы можете поучаствовать в ...",
+				Date:         "Август 18 , 2025",
+			})
+			@components.Card(&components.CardInfo{
+				ImagePath:    "/public/images/sport/05.png",
+				Title:        "Открытие сезона байдарок",
+				AutorName:    "Михаил Аршинов",
+				AutorImgPath: "/public/images/avatar/12.png",
+				Text:         "Сегодня был открыт сезон путешествия на байдарках, где вы можете поучаствовать в ...",
+				Date:         "Август 18 , 2025",
+			})
+			@components.Card(&components.CardInfo{
+				ImagePath:    "/public/images/sport/05.png",
+				Title:        "Открытие сезона байдарок",
+				AutorName:    "Михаил Аршинов",
+				AutorImgPath: "/public/images/avatar/12.png",
+				Text:         "Сегодня был открыт сезон путешествия на байдарках, где вы можете поучаствовать в ...",
+				Date:         "Август 18 , 2025",
+			})
+		}
 		@layout.Copyright()
 	</main>
 }

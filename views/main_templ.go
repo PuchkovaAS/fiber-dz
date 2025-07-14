@@ -96,22 +96,127 @@ func Main(tags []TagData) templ.Component {
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		templ_7745c5c3_Err = components.Card(&components.CardInfo{
-			ImagePath:    "/public/images/sport/05.png",
-			Title:        "Открытие сезона байдарок",
-			AutorName:    "Михаил Аршинов",
-			AutorImgPath: "/public/images/avatar/12.png",
-			Text:         "Сегодня был открыт сезон путешествия на байдарках, где вы можете поучаствовать в ...",
-			Date:         "Август 18 , 2025",
-		}).Render(ctx, templ_7745c5c3_Buffer)
+		templ_7745c5c3_Var4 := templruntime.GeneratedTemplate(func(templ_7745c5c3_Input templruntime.GeneratedComponentInput) (templ_7745c5c3_Err error) {
+			templ_7745c5c3_W, ctx := templ_7745c5c3_Input.Writer, templ_7745c5c3_Input.Context
+			templ_7745c5c3_Buffer, templ_7745c5c3_IsBuffer := templruntime.GetBuffer(templ_7745c5c3_W)
+			if !templ_7745c5c3_IsBuffer {
+				defer func() {
+					templ_7745c5c3_BufErr := templruntime.ReleaseBuffer(templ_7745c5c3_Buffer)
+					if templ_7745c5c3_Err == nil {
+						templ_7745c5c3_Err = templ_7745c5c3_BufErr
+					}
+				}()
+			}
+			ctx = templ.InitializeContext(ctx)
+			templ_7745c5c3_Err = components.TopTag(components.TagInfo{
+				Title:   "Как безопасно водить",
+				Text:    "Длинный текст про то, как можно безопасно водить автомобиль.",
+				ImgPath: "/public/images/car/05.png",
+			}).Render(ctx, templ_7745c5c3_Buffer)
+			if templ_7745c5c3_Err != nil {
+				return templ_7745c5c3_Err
+			}
+			templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 2, " ")
+			if templ_7745c5c3_Err != nil {
+				return templ_7745c5c3_Err
+			}
+			templ_7745c5c3_Err = components.TopTag(components.TagInfo{
+				Title:   "Как безопасно водить",
+				Text:    "Длинный текст про то, как можно безопасно водить автомобиль.",
+				ImgPath: "/public/images/car/05.png",
+			}).Render(ctx, templ_7745c5c3_Buffer)
+			if templ_7745c5c3_Err != nil {
+				return templ_7745c5c3_Err
+			}
+			templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 3, " ")
+			if templ_7745c5c3_Err != nil {
+				return templ_7745c5c3_Err
+			}
+			templ_7745c5c3_Err = components.TopTag(components.TagInfo{
+				Title:   "Как безопасно водить",
+				Text:    "Длинный текст про то, как можно безопасно водить автомобиль.",
+				ImgPath: "/public/images/car/05.png",
+			}).Render(ctx, templ_7745c5c3_Buffer)
+			if templ_7745c5c3_Err != nil {
+				return templ_7745c5c3_Err
+			}
+			return nil
+		})
+		templ_7745c5c3_Err = layout.TopTagsLayout().Render(templ.WithChildren(ctx, templ_7745c5c3_Var4), templ_7745c5c3_Buffer)
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		templ_7745c5c3_Err = components.TopTag(components.TagInfo{
-			Title:   "Как безопасно водить",
-			Text:    "Длинный текст про то, как можно безопасно водить автомобиль.",
-			ImgPath: "/public/images/car/05.png",
-		}).Render(ctx, templ_7745c5c3_Buffer)
+		templ_7745c5c3_Var5 := templruntime.GeneratedTemplate(func(templ_7745c5c3_Input templruntime.GeneratedComponentInput) (templ_7745c5c3_Err error) {
+			templ_7745c5c3_W, ctx := templ_7745c5c3_Input.Writer, templ_7745c5c3_Input.Context
+			templ_7745c5c3_Buffer, templ_7745c5c3_IsBuffer := templruntime.GetBuffer(templ_7745c5c3_W)
+			if !templ_7745c5c3_IsBuffer {
+				defer func() {
+					templ_7745c5c3_BufErr := templruntime.ReleaseBuffer(templ_7745c5c3_Buffer)
+					if templ_7745c5c3_Err == nil {
+						templ_7745c5c3_Err = templ_7745c5c3_BufErr
+					}
+				}()
+			}
+			ctx = templ.InitializeContext(ctx)
+			templ_7745c5c3_Err = components.Card(&components.CardInfo{
+				ImagePath:    "/public/images/sport/05.png",
+				Title:        "Открытие сезона байдарок",
+				AutorName:    "Михаил Аршинов",
+				AutorImgPath: "/public/images/avatar/12.png",
+				Text:         "Сегодня был открыт сезон путешествия на байдарках, где вы можете поучаствовать в ...",
+				Date:         "Август 18 , 2025",
+			}).Render(ctx, templ_7745c5c3_Buffer)
+			if templ_7745c5c3_Err != nil {
+				return templ_7745c5c3_Err
+			}
+			templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 4, " ")
+			if templ_7745c5c3_Err != nil {
+				return templ_7745c5c3_Err
+			}
+			templ_7745c5c3_Err = components.Card(&components.CardInfo{
+				ImagePath:    "/public/images/sport/05.png",
+				Title:        "Открытие сезона байдарок",
+				AutorName:    "Михаил Аршинов",
+				AutorImgPath: "/public/images/avatar/12.png",
+				Text:         "Сегодня был открыт сезон путешествия на байдарках, где вы можете поучаствовать в ...",
+				Date:         "Август 18 , 2025",
+			}).Render(ctx, templ_7745c5c3_Buffer)
+			if templ_7745c5c3_Err != nil {
+				return templ_7745c5c3_Err
+			}
+			templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 5, " ")
+			if templ_7745c5c3_Err != nil {
+				return templ_7745c5c3_Err
+			}
+			templ_7745c5c3_Err = components.Card(&components.CardInfo{
+				ImagePath:    "/public/images/sport/05.png",
+				Title:        "Открытие сезона байдарок",
+				AutorName:    "Михаил Аршинов",
+				AutorImgPath: "/public/images/avatar/12.png",
+				Text:         "Сегодня был открыт сезон путешествия на байдарках, где вы можете поучаствовать в ...",
+				Date:         "Август 18 , 2025",
+			}).Render(ctx, templ_7745c5c3_Buffer)
+			if templ_7745c5c3_Err != nil {
+				return templ_7745c5c3_Err
+			}
+			templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 6, " ")
+			if templ_7745c5c3_Err != nil {
+				return templ_7745c5c3_Err
+			}
+			templ_7745c5c3_Err = components.Card(&components.CardInfo{
+				ImagePath:    "/public/images/sport/05.png",
+				Title:        "Открытие сезона байдарок",
+				AutorName:    "Михаил Аршинов",
+				AutorImgPath: "/public/images/avatar/12.png",
+				Text:         "Сегодня был открыт сезон путешествия на байдарках, где вы можете поучаствовать в ...",
+				Date:         "Август 18 , 2025",
+			}).Render(ctx, templ_7745c5c3_Buffer)
+			if templ_7745c5c3_Err != nil {
+				return templ_7745c5c3_Err
+			}
+			return nil
+		})
+		templ_7745c5c3_Err = layout.PopularPostsLayout().Render(templ.WithChildren(ctx, templ_7745c5c3_Var5), templ_7745c5c3_Buffer)
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
@@ -119,7 +224,7 @@ func Main(tags []TagData) templ.Component {
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 2, "</main>")
+		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 7, "</main>")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
