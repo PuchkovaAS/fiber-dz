@@ -1,0 +1,59 @@
+
+package layout
+
+templ TopTagsLayout() {
+	@TopTagsLayoutStyle()
+	<div class="top-tag-panel">
+		<div class="top-tags-wrapper">
+			<div class="top-tags-scroller">
+				{ children... }
+			</div>
+		</div>
+	</div>
+}
+
+templ TopTagsLayoutStyle() {
+	<style>
+    .top-tag-panel {
+        width: 100%;
+        padding: 20px 0;
+        overflow-x: hidden;
+    }
+
+    .top-tags-wrapper {
+        width: 100%;
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 20px;
+    }
+
+    .top-tags-scroller {
+        display: flex;
+        gap: 20px;
+        overflow-x: auto;
+        padding-bottom: 20px;
+        scrollbar-width: thin;
+        scrollbar-color: var(--color-primary) var(--color-gray);
+    }
+
+    /* Стили для скроллбара (опционально) */
+    .top-tags-scroller::-webkit-scrollbar {
+        height: 8px;
+    }
+
+    .top-tags-scroller::-webkit-scrollbar-track {
+        background: var(--color-gray);
+        border-radius: 4px;
+    }
+
+    .top-tags-scroller::-webkit-scrollbar-thumb {
+        background-color: var(--color-primary);
+        border-radius: 4px;
+    }
+
+    /* Чтобы карточки не сжимались */
+    .top-tags-scroller > * {
+        flex: 0 0 auto;
+    }
+    </style>
+}
