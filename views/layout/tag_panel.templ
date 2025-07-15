@@ -1,5 +1,7 @@
 package layout
 
+import "fiber-dz/views/components"
+
 templ TagPanel() {
 	@TagPanelStyle()
 	<div class="tag-panel">
@@ -8,11 +10,7 @@ templ TagPanel() {
 				{ children... }
 			</div>
 		</div>
-		<div class="arrow">
-			<svg class="arrow-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-				<path d="M9 18L15 12L9 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
-			</svg>
-		</div>
+		@components.ArrowRight()
 	</div>
 }
 
@@ -56,27 +54,5 @@ templ TagPanelStyle() {
             display: none; /* Chrome/Safari */
         }
 
-        .arrow {
-            width: 24px;
-            height: 24px;
-            margin-left: auto;
-            flex-shrink: 0;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-        }
-
-        .arrow-icon {
-            width: 100%;
-            height: 100%;
-            color: black;
-            transition: all 0.2s ease;
-        }
-
-        .arrow:hover .arrow-icon {
-            transform: translateX(2px);
-            color: #555;
-        }
     </style>
 }

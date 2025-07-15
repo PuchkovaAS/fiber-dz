@@ -1,0 +1,62 @@
+package components
+
+templ ArrowRight() {
+	@ArrowStyle()
+	<div class="arrow-container arrow-right">
+		<svg class="arrow-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+			<path d="M9 18L15 12L9 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+		</svg>
+	</div>
+}
+
+templ ArrowLeft() {
+	@ArrowStyle()
+	<div class="arrow-container arrow-left">
+		<svg class="arrow-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+			<path d="M15 18L9 12L15 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+		</svg>
+	</div>
+}
+
+templ ArrowStyle() {
+	<style>
+        .arrow-container {
+            width: 32px;
+            height: 32px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            border-radius: 50%;
+            transition: all 0.2s ease;
+        }
+
+        .arrow-right {
+            background-color: var(--color-black-5);
+        }
+
+        .arrow-left {
+            opacity: 0.3;
+        }
+
+        .arrow-icon {
+            width: 24px;
+            height: 24px;
+            color: var(--color-black);
+            transition: all 0.2s ease;
+        }
+
+        .arrow-container:hover {
+            background-color: var(--color-text-hover);
+        }
+
+        .arrow-container:hover .arrow-icon {
+            transform: translateX(2px);
+            color: var(--color-primary);
+        }
+
+        .arrow-left:hover {
+            opacity: 1;
+        }
+    </style>
+}

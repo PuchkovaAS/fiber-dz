@@ -8,6 +8,8 @@ package layout
 import "github.com/a-h/templ"
 import templruntime "github.com/a-h/templ/runtime"
 
+import "fiber-dz/views/components"
+
 func TagPanel() templ.Component {
 	return templruntime.GeneratedTemplate(func(templ_7745c5c3_Input templruntime.GeneratedComponentInput) (templ_7745c5c3_Err error) {
 		templ_7745c5c3_W, ctx := templ_7745c5c3_Input.Writer, templ_7745c5c3_Input.Context
@@ -41,7 +43,15 @@ func TagPanel() templ.Component {
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 2, "</div></div><div class=\"arrow\"><svg class=\"arrow-icon\" viewBox=\"0 0 24 24\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M9 18L15 12L9 6\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></path></svg></div></div>")
+		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 2, "</div></div>")
+		if templ_7745c5c3_Err != nil {
+			return templ_7745c5c3_Err
+		}
+		templ_7745c5c3_Err = components.ArrowRight().Render(ctx, templ_7745c5c3_Buffer)
+		if templ_7745c5c3_Err != nil {
+			return templ_7745c5c3_Err
+		}
+		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 3, "</div>")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
@@ -70,7 +80,7 @@ func TagPanelStyle() templ.Component {
 			templ_7745c5c3_Var2 = templ.NopComponent
 		}
 		ctx = templ.ClearChildren(ctx)
-		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 3, "<style>\n        .tag-panel {\n            --panel-padding: 20px;\n            width: 100%;\n            max-width: 1512px;\n            height: 68px;\n            margin: 0 auto;\n            background: var(--color-tag);\n            border-radius: 12px;\n            display: flex;\n            align-items: center;\n            position: relative;\n            padding: 0 var(--panel-padding);\n            box-sizing: border-box;\n        }\n\n        .tags-wrapper {\n            flex: 1;\n            overflow: hidden;\n            position: relative;\n            height: 100%;\n            display: flex;\n            align-items: center;\n        }\n\n        .tags-scroller {\n            display: flex;\n            gap: 24px;\n            height: 100%;\n            align-items: center;\n            overflow-x: auto;\n            scrollbar-width: none; /* Firefox */\n            width: calc(100% - 44px); /* 24px arrow + 20px padding */\n        }\n\n        .tags-scroller::-webkit-scrollbar {\n            display: none; /* Chrome/Safari */\n        }\n\n        .arrow {\n            width: 24px;\n            height: 24px;\n            margin-left: auto;\n            flex-shrink: 0;\n            display: flex;\n            align-items: center;\n            justify-content: center;\n            cursor: pointer;\n        }\n\n        .arrow-icon {\n            width: 100%;\n            height: 100%;\n            color: black;\n            transition: all 0.2s ease;\n        }\n\n        .arrow:hover .arrow-icon {\n            transform: translateX(2px);\n            color: #555;\n        }\n    </style>")
+		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 4, "<style>\n        .tag-panel {\n            --panel-padding: 20px;\n            width: 100%;\n            max-width: 1512px;\n            height: 68px;\n            margin: 0 auto;\n            background: var(--color-tag);\n            border-radius: 12px;\n            display: flex;\n            align-items: center;\n            position: relative;\n            padding: 0 var(--panel-padding);\n            box-sizing: border-box;\n        }\n\n        .tags-wrapper {\n            flex: 1;\n            overflow: hidden;\n            position: relative;\n            height: 100%;\n            display: flex;\n            align-items: center;\n        }\n\n        .tags-scroller {\n            display: flex;\n            gap: 24px;\n            height: 100%;\n            align-items: center;\n            overflow-x: auto;\n            scrollbar-width: none; /* Firefox */\n            width: calc(100% - 44px); /* 24px arrow + 20px padding */\n        }\n\n        .tags-scroller::-webkit-scrollbar {\n            display: none; /* Chrome/Safari */\n        }\n\n    </style>")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}

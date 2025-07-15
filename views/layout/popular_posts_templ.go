@@ -8,6 +8,8 @@ package layout
 import "github.com/a-h/templ"
 import templruntime "github.com/a-h/templ/runtime"
 
+import "fiber-dz/views/components"
+
 func PopularPostsLayout() templ.Component {
 	return templruntime.GeneratedTemplate(func(templ_7745c5c3_Input templruntime.GeneratedComponentInput) (templ_7745c5c3_Err error) {
 		templ_7745c5c3_W, ctx := templ_7745c5c3_Input.Writer, templ_7745c5c3_Input.Context
@@ -33,7 +35,19 @@ func PopularPostsLayout() templ.Component {
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 1, "<div class=\"popular-posts-panel\"><div class=\"popular-posts-wrapper\"><div class=\"popular-posts-header-section\"><div class=\"popular-posts-title-section\"><div class=\"popular-posts-rectangle\"></div><h1 class=\"popular-posts-title\">Популярное</h1></div><div class=\"popular-posts-arrow-slider\"><div class=\"popular-posts-arrow popular-posts-arrow-left\"><svg class=\"popular-posts-arrow-icon\" viewBox=\"0 0 24 24\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M15 18L9 12L15 6\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></path></svg></div><div class=\"popular-posts-arrow popular-posts-arrow-right\"><svg class=\"popular-posts-arrow-icon\" viewBox=\"0 0 24 24\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M9 18L15 12L9 6\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></path></svg></div></div></div><div class=\"popular-posts-scroller\">")
+		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 1, "<div class=\"popular-posts-panel\"><div class=\"popular-posts-wrapper\"><div class=\"popular-posts-header-section\"><div class=\"popular-posts-title-section\"><div class=\"popular-posts-rectangle\"></div><h4 class=\"popular-posts-title\">Популярное</h4></div><div class=\"popular-posts-arrow-slider\">")
+		if templ_7745c5c3_Err != nil {
+			return templ_7745c5c3_Err
+		}
+		templ_7745c5c3_Err = components.ArrowLeft().Render(ctx, templ_7745c5c3_Buffer)
+		if templ_7745c5c3_Err != nil {
+			return templ_7745c5c3_Err
+		}
+		templ_7745c5c3_Err = components.ArrowRight().Render(ctx, templ_7745c5c3_Buffer)
+		if templ_7745c5c3_Err != nil {
+			return templ_7745c5c3_Err
+		}
+		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 2, "</div></div><div class=\"popular-posts-scroller\">")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
@@ -41,7 +55,15 @@ func PopularPostsLayout() templ.Component {
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 2, "</div><div class=\"popular-posts-footer\"><a href=\"#\" class=\"popular-posts-all-link\">Все новости</a> <span class=\"popular-posts-counter\">15/24.54</span></div></div></div>")
+		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 3, "</div><div class=\"popular-posts-button-container\"><div class=\"popular-posts-button\"><span class=\"popular-posts-button-label\">Все новости</span>")
+		if templ_7745c5c3_Err != nil {
+			return templ_7745c5c3_Err
+		}
+		templ_7745c5c3_Err = components.ArrowRight().Render(ctx, templ_7745c5c3_Buffer)
+		if templ_7745c5c3_Err != nil {
+			return templ_7745c5c3_Err
+		}
+		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 4, "</div></div></div></div>")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
@@ -70,7 +92,7 @@ func PopularPostsLayoutStyle() templ.Component {
 			templ_7745c5c3_Var2 = templ.NopComponent
 		}
 		ctx = templ.ClearChildren(ctx)
-		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 3, "<style>\n    .popular-posts-panel {\n        width: 100%;\n        padding: 20px 0;\n        overflow-x: hidden;\n        background: var(--color-background);\n        color: var(--color-text);\n    }\n\n    .popular-posts-wrapper {\n        width: 100%;\n        max-width: 1512px;\n        margin: 0 auto;\n        padding: 0 20px;\n    }\n\n    .popular-posts-header-section {\n        display: flex;\n        width: 100%;\n        align-items: center;\n        justify-content: space-between;\n        position: relative;\n        margin-bottom: 20px;\n    }\n\n    .popular-posts-title-section {\n        display: inline-flex;\n        align-items: center;\n        gap: 6px;\n        position: relative;\n        flex: 0 0 auto;\n    }\n\n    .popular-posts-rectangle {\n        position: relative;\n        width: 4px;\n        height: 20px;\n        background-color: var(--color-primary);\n        border-radius: 12px;\n    }\n\n    .popular-posts-title {\n        position: relative;\n        width: fit-content;\n        font-family: var(--h4-font-family);\n        font-weight: var(--h4-font-weight);\n        color: var(--black);\n        font-size: var(--h4-font-size);\n        letter-spacing: var(--h4-letter-spacing);\n        line-height: var(--h4-line-height);\n        margin: 0;\n    }\n\n    .popular-posts-arrow-slider {\n        display: flex;\n        gap: 8px;\n    }\n\n    .popular-posts-arrow {\n        display: flex;\n        align-items: center;\n        justify-content: center;\n        width: 32px;\n        height: 32px;\n        border-radius: 50%;\n        cursor: pointer;\n    }\n\n    .popular-posts-arrow-left {\n        opacity: 0.3;\n    }\n\n    .popular-posts-arrow-right {\n        background-color: rgba(0, 0, 0, 0.05);\n    }\n\n    .popular-posts-arrow-icon {\n        width: 24px;\n        height: 24px;\n    }\n\n    .popular-posts-scroller {\n        display: flex;\n        gap: 15px;\n        overflow-x: auto;\n        padding-bottom: 20px;\n        scrollbar-width: none;\n    }\n\n    .popular-posts-scroller::-webkit-scrollbar {\n        display: none;\n    }\n\n    .popular-posts-footer {\n        display: flex;\n        justify-content: space-between;\n        align-items: center;\n        margin-top: 20px;\n        padding-top: 15px;\n        border-top: 1px solid var(--color-border);\n    }\n\n    .popular-posts-all-link {\n        font-weight: bold;\n        color: var(--color-primary);\n        text-decoration: none;\n    }\n\n    .popular-posts-all-link:hover {\n        text-decoration: underline;\n    }\n\n    .popular-posts-counter {\n        color: var(--color-text-secondary);\n        font-size: 0.9rem;\n    }\n\n    /* Чтобы карточки не сжимались */\n    .popular-posts-scroller > * {\n        flex: 0 0 auto;\n    }\n    </style>")
+		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 5, "<style>\n    :root {\n        /* Text style variables */\n        --font-family: \"Roboto\", sans-serif;\n        --h3-font-size: 25px;\n        --h3-font-weight: 400;\n        --h4-font-size: 20px;\n        --h4-font-weight: 500;\n        --h5-font-size: 16px;\n        --h5-font-weight: 500;\n        --text-sm-font-size: 14px;\n        --text-sm-font-weight: 500;\n        --text-sm-line-height: 20px;\n    }\n\n    .popular-posts-panel {\n        width: 100%;\n        padding: 20px 0;\n        overflow-x: hidden;\n        background: var(--color-white);\n        color: var(--color-black-75);\n        font-family: var(--font-family);\n    }\n\n    .popular-posts-wrapper {\n        width: 100%;\n        max-width: 1512px;\n        margin: 0 auto;\n        padding: 0 20px;\n    }\n\n    .popular-posts-header-section {\n        display: flex;\n        width: 100%;\n        align-items: center;\n        justify-content: space-between;\n        position: relative;\n        margin-bottom: 20px;\n    }\n\n    .popular-posts-title-section {\n        display: inline-flex;\n        align-items: center;\n        gap: 6px;\n        position: relative;\n        flex: 0 0 auto;\n    }\n\n    .popular-posts-rectangle {\n        position: relative;\n        width: 4px;\n        height: 12px;\n        background-color: var(--color-primary);\n        border-radius: 12px;\n    }\n\n    .popular-posts-title {\n        position: relative;\n        width: fit-content;\n        font-family: var(--font-family);\n        font-weight: var(--h4-font-weight);\n        font-size: var(--h4-font-size);\n        color: var(--color-black);\n        letter-spacing: 0px;\n        line-height: normal;\n        white-space: nowrap;\n        margin: 0;\n    }\n\n    .popular-posts-arrow-slider {\n        display: flex;\n        gap: 8px;\n    }\n\n    .popular-posts-arrow-slider .arrow-left {\n        opacity: 0.3;\n    }\n\n    .popular-posts-scroller {\n        display: flex;\n        gap: 15px;\n        overflow-x: auto;\n        padding-bottom: 20px;\n        scrollbar-width: none;\n    }\n\n    .popular-posts-scroller::-webkit-scrollbar {\n        display: none;\n    }\n\n    .popular-posts-button-container {\n        display: flex;\n        justify-content: center;\n        margin-top: 20px;\n    }\n\n    .popular-posts-button {\n        display: inline-flex;\n        align-items: center;\n        justify-content: center;\n        gap: 8px;\n        width: 146px;\n        height: 40px;\n        background-color: var(--color-black-5);\n        border-radius: 12px;\n        cursor: pointer;\n        transition: background-color 0.2s;\n    }\n\n    .popular-posts-button:hover {\n        background-color: var(--color-text-hover);\n    }\n\n    .popular-posts-button-label {\n        font-family: var(--font-family);\n        font-weight: var(--text-sm-font-weight);\n        color: var(--color-black-75);\n        font-size: var(--text-sm-font-size);\n        letter-spacing: 0;\n        line-height: var(--text-sm-line-height);\n    }\n\n    /* Чтобы карточки не сжимались */\n    .popular-posts-scroller > * {\n        flex: 0 0 auto;\n    }\n    </style>")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
