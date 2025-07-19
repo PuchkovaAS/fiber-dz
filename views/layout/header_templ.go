@@ -35,7 +35,7 @@ func Header() templ.Component {
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 1, "<header class=\"header\"><div class=\"header-left\"><!-- Текстовый логотип вместо картинки --><h2 class=\"logo\">Новости</h2><!-- Навигация с выпадающим меню --><nav class=\"nav\"><div class=\"nav-item categories\"><span>Категории</span> <span class=\"dropdown-icon\">⌄</span><div class=\"dropdown-menu\">")
+		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 1, "<header class=\"header\"><div class=\"header-left\"><!-- Текстовый логотип вместо картинки --><a href=\"/\" class=\"logo\">Новости</a><!-- Навигация с выпадающим меню --><nav class=\"nav\"><div class=\"nav-item categories\"><span>Категории</span> <span class=\"dropdown-icon\">⌄</span><div class=\"dropdown-menu\">")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}

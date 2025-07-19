@@ -1,0 +1,21 @@
+package views
+
+import (
+	"fiber-dz/views/components"
+	"fiber-dz/views/layout"
+)
+
+templ Registration(tags []TagData) {
+	@layout.Layout(layout.LayoutProps{
+		Title:           "Регистрация",
+		MetaDescription: "Просто сайт"})
+	<main>
+		@layout.Header() {
+			for _, tag := range tags {
+				@components.Category(tag.Name, tag.Url)
+			}
+		}
+		@layout.RegistrationForm()
+		@layout.Copyright()
+	</main>
+}

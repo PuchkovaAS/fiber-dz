@@ -7,10 +7,7 @@ templ PopularPostsLayout() {
 	<div class="popular-posts-panel">
 		<div class="popular-posts-wrapper">
 			<div class="popular-posts-header-section">
-				<div class="popular-posts-title-section">
-					<div class="popular-posts-rectangle"></div>
-					<h4 class="popular-posts-title">Популярное</h4>
-				</div>
+				@components.TitleRed("Популярное")
 				<div class="popular-posts-arrow-slider">
 					@components.ArrowLeft()
 					@components.ArrowRight()
@@ -68,35 +65,6 @@ templ PopularPostsLayoutStyle() {
         justify-content: space-between;
         position: relative;
         margin-bottom: 20px;
-    }
-
-    .popular-posts-title-section {
-        display: inline-flex;
-        align-items: center;
-        gap: 6px;
-        position: relative;
-        flex: 0 0 auto;
-    }
-
-    .popular-posts-rectangle {
-        position: relative;
-        width: 4px;
-        height: 12px;
-        background-color: var(--color-primary);
-        border-radius: 12px;
-    }
-
-    .popular-posts-title {
-        position: relative;
-        width: fit-content;
-        font-family: var(--font-family);
-        font-weight: var(--h4-font-weight);
-        font-size: var(--h4-font-size);
-        color: var(--color-black);
-        letter-spacing: 0px;
-        line-height: normal;
-        white-space: nowrap;
-        margin: 0;
     }
 
     .popular-posts-arrow-slider {

@@ -1,0 +1,44 @@
+package components
+
+templ TitleRed(title string) {
+	@TitleRedStyle()
+	<div class="title-red-title-section">
+		<div class="title-red-rectangle"></div>
+		<h4 class="title-red-title">{ title }</h4>
+	</div>
+}
+
+templ TitleRedStyle() {
+	<style>
+
+    .title-red-title-section {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        position: relative;
+        flex: 0 0 auto;
+    }
+
+    .title-red-rectangle {
+        position: relative;
+        width: 4px;
+        height: 12px;
+        background-color: var(--color-primary);
+        border-radius: 12px;
+    }
+
+    .title-red-title {
+        position: relative;
+        width: fit-content;
+        font-family: var(--font-family);
+        font-weight: var(--h4-font-weight);
+        font-size: var(--h4-font-size);
+        color: var(--color-black);
+        letter-spacing: 0px;
+        line-height: normal;
+        white-space: nowrap;
+        margin: 0;
+    }
+
+    </style>
+}

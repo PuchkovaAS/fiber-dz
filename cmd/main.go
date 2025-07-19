@@ -2,6 +2,7 @@ package main
 
 import (
 	"fiber-dz/config"
+	"fiber-dz/internal/auth"
 	"fiber-dz/internal/pages"
 	"fiber-dz/pkg/logger"
 
@@ -25,5 +26,6 @@ func main() {
 	app.Static("/public", "./public")
 
 	pages.NewHandler(app, logger)
+	auth.NewHandler(app, logger)
 	app.Listen(":3000")
 }
