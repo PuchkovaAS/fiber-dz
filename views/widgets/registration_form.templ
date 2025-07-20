@@ -9,7 +9,13 @@ templ RegistrationForm() {
 		<div class="registration-form__title">
 			@components.TitleRed("Регистрация на сайте")
 		</div>
-		<form class="registration-form" hx-post="/register_user" hx-trigger="submit" hx-target="#registration-result" hx-swap="innerHTML swap:0.5s">
+		<form
+			class="registration-form"
+			hx-post="/auth/register_user"
+			hx-trigger="submit"
+			hx-target="#registration-result"
+			hx-swap="innerHTML swap:0.5s"
+		>
 			<div class="registration-form__inputs">
 				@components.Input(components.InputProps{Placeholder: "Имя", Name: "name"})
 				@components.Input(components.InputProps{Placeholder: "Email", Name: "email"})
