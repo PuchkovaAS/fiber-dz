@@ -1,0 +1,74 @@
+package widgets
+
+import "fiber-dz/views/components"
+
+templ RegistrationForm() {
+	<div class="registration-container">
+		@RegistrationFormStyle()
+		<div class="registration-form__title">
+			@components.TitleRed("Регистрация на сайте")
+		</div>
+		<form class="registration-form">
+			@components.Input(components.InputProps{Placeholder: "Имя", Name: "name"})
+			@components.Input(components.InputProps{Placeholder: "Email", Name: "email"})
+			@components.Input(components.InputProps{Placeholder: "Пароль", Name: "password"})
+			<div class="registration-form-button">
+				@components.SubmitButton() {
+					<span class="registration-form__submit">Зарегистрироваться</span>
+					<span class="registration-form__loader"></span>
+				}
+			</div>
+		</form>
+	</div>
+}
+
+templ RegistrationFormStyle() {
+	<style>
+        .registration-container {
+            max-width: 500px;
+            margin: 0 auto;
+            padding-top: 118px;
+            padding-bottom: 158px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .registration-form__title {
+            padding-bottom: 40px;
+            text-align: center;
+            width: 100%; /* Важно: занимает всю ширину контейнера */
+        }
+
+        .registration-form {
+            display: flex;
+            flex-direction: column;
+            gap: 51px;
+            width: 100%; /* Форма занимает всю доступную ширину */
+            align-items: center; /* Центрируем элементы формы */
+        }
+
+        .registration-form-button {
+            width: 100%;
+            display: flex;
+            justify-content: center; /* Центрируем кнопку по горизонтали */
+        }
+
+        /* Остальные стили остаются без изменений */
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+            width: 100%; /* Группы полей занимают всю ширину формы */
+            max-width: 400px; /* Ограничиваем ширину полей ввода */
+        }
+
+        /* Добавляем для кнопки, если нужно */
+        .submit-button {
+            width: auto; /* или конкретное значение, например 200px */
+            margin: 0 auto; /* Дополнительное центрирование */
+        }
+
+        /* ... остальные ваши стили ... */
+    </style>
+}

@@ -5,51 +5,49 @@ import "fiber-dz/views/components"
 templ Header() {
 	@HeaderStyle()
 	<header class="header">
-		<div class="header-left">
-			<!-- Текстовый логотип вместо картинки -->
-			<a href="/" class="logo">Новости</a>
-			<!-- Навигация с выпадающим меню -->
-			<nav class="nav">
-				<div class="nav-item categories">
-					<span>Категории</span>
-					<span class="dropdown-icon">⌄</span>
-					<div class="dropdown-menu">
-						{ children... }
+		<div class="header-container">
+			<!-- Добавляем новый контейнер -->
+			<div class="header-left">
+				<!-- Текстовый логотип вместо картинки -->
+				<a href="/" class="logo">Новости</a>
+				<!-- Навигация с выпадающим меню -->
+				<nav class="nav">
+					<div class="nav-item categories">
+						<span>Категории</span>
+						<span class="dropdown-icon">⌄</span>
+						<div class="dropdown-menu">
+							{ children... }
+						</div>
 					</div>
-				</div>
-				<a href="/contacts" class="nav-item">Контакты</a>
-			</nav>
-		</div>
-		<div class="header-right">
-			@components.SearchPanel()
-			@components.Auth()
+					<a href="/contacts" class="nav-item">Контакты</a>
+				</nav>
+			</div>
+			<div class="header-right">
+				@components.SearchPanel()
+				@components.Auth()
+			</div>
 		</div>
 	</header>
 }
 
 templ HeaderStyle() {
 	<style>
-    :root {
-        /* Text style variables */
-        --font-family: "Roboto", sans-serif;
-        --h2-font-size: 22px;
-        --h2-font-weight: 700;
-        --h5-font-size: 16px;
-        --h5-font-weight: 500;
-        --nav-item-font-weight: 500;
-        --nav-item-letter-spacing: 0.5px;
+
+    /* Основные стили хедера */
+    .header {
+        width: 100%;
+        background-color: var(--color-white);
+        padding-top: 25px;  /* Добавляем отступ сверху */
     }
 
-    /* Базовые стили */
-    .header {
+    /* Новый контейнер для содержимого хедера */
+    .header-container {
         margin: 0 auto;
-        width: 100%;
         max-width: 1512px;
         display: flex;
         justify-content: space-between;
         align-items: center;
         padding: 15px 5%;
-        background-color: var(--color-white);
     }
     
     /* Логотип */

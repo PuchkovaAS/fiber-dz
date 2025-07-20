@@ -3,6 +3,7 @@ package views
 import (
 	"fiber-dz/views/components"
 	"fiber-dz/views/layout"
+	"fiber-dz/views/widgets"
 )
 
 templ Registration(tags []TagData) {
@@ -15,7 +16,9 @@ templ Registration(tags []TagData) {
 				@components.Category(tag.Name, tag.Url)
 			}
 		}
-		@layout.RegistrationForm()
-		@layout.Copyright()
+		@widgets.RegistrationForm()
 	</main>
+	<footer style="margin-top: auto; padding-bottom: 102px;">
+		@layout.Copyright()
+	</footer>
 }

@@ -4,24 +4,32 @@ import "fiber-dz/views/components"
 
 templ TagPanel() {
 	@TagPanelStyle()
-	<div class="tag-panel">
-		<div class="tags-wrapper">
-			<div class="tags-scroller">
-				{ children... }
+	<div class="tag-panel-container">
+		<!-- Добавляем обертку -->
+		<div class="tag-panel">
+			<div class="tags-wrapper">
+				<div class="tags-scroller">
+					{ children... }
+				</div>
 			</div>
+			@components.ArrowRight()
 		</div>
-		@components.ArrowRight()
 	</div>
 }
 
 templ TagPanelStyle() {
 	<style>
+        .tag-panel-container {
+            padding: 20px 0 20px 0;  /* Верх 45px, низ 60px */
+            width: 100%;
+            max-width: 1512px;
+            margin: 0 auto;
+        }
+
         .tag-panel {
             --panel-padding: 20px;
             width: 100%;
-            max-width: 1512px;
             height: 68px;
-            margin: 0 auto;
             background: var(--color-tag);
             border-radius: 12px;
             display: flex;
@@ -53,6 +61,5 @@ templ TagPanelStyle() {
         .tags-scroller::-webkit-scrollbar {
             display: none; /* Chrome/Safari */
         }
-
     </style>
 }

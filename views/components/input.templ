@@ -15,12 +15,30 @@ templ Input(props InputProps) {
 
 templ InputStyle() {
 	<style>
-    .input-title {
-        font-size: var(--h5-font-size);
-        font-weight: var(--h5-font-weight);
-        color: var(--color-dark75);
-        position: fixed;
-        width: 488px;
-    }
-</style>
+        .input-box {
+            position: relative;
+            margin-top: 15px; /* Space for the floating label */
+        }
+
+        .input-title {
+            font-size: var(--h5-font-size);
+            font-weight: var(--h5-font-weight);
+            color: var(--color-dark75);
+            position: absolute;
+            top: -30px; /* Move up by 8px */
+            left: 5px; /* Move right by 5px */
+            background: white; /* Optional: to make text stand out over backgrounds */
+            padding: 0 4px; /* Small horizontal padding */
+        }
+
+        .input {
+            border-radius: 12px;
+            width: 488px;
+            height: 48px;
+            background: var(--color-gray);
+            border: none;
+            padding-left: 8px; /* Add some padding so text doesn't touch the edge */
+            position: relative;
+        }
+    </style>
 }

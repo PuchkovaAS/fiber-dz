@@ -93,7 +93,7 @@ func InputStyle() templ.Component {
 			templ_7745c5c3_Var4 = templ.NopComponent
 		}
 		ctx = templ.ClearChildren(ctx)
-		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 4, "<style>\n    .input-title {\n        font-size: var(--h5-font-size);\n        font-weight: var(--h5-font-weight);\n        color: var(--color-dark75);\n        position: fixed;\n        width: 488px;\n    }\n</style>")
+		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 4, "<style>\n        .input-box {\n            position: relative;\n            margin-top: 15px; /* Space for the floating label */\n        }\n\n        .input-title {\n            font-size: var(--h5-font-size);\n            font-weight: var(--h5-font-weight);\n            color: var(--color-dark75);\n            position: absolute;\n            top: -30px; /* Move up by 8px */\n            left: 5px; /* Move right by 5px */\n            background: white; /* Optional: to make text stand out over backgrounds */\n            padding: 0 4px; /* Small horizontal padding */\n        }\n\n        .input {\n            border-radius: 12px;\n            width: 488px;\n            height: 48px;\n            background: var(--color-gray);\n            border: none;\n            padding-left: 8px; /* Add some padding so text doesn't touch the edge */\n            position: relative;\n        }\n    </style>")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
