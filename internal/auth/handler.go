@@ -2,7 +2,6 @@ package auth
 
 import (
 	"fiber-dz/pkg/validator"
-	"fiber-dz/views"
 	"fiber-dz/views/components"
 	"log/slog"
 
