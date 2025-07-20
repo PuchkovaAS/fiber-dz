@@ -39,7 +39,7 @@ func RegistrationForm() templ.Component {
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 2, "<div class=\"registration-form__title\">")
+		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 2, "<div id=\"registration-result\"></div><div class=\"registration-form__title\">")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
@@ -47,7 +47,7 @@ func RegistrationForm() templ.Component {
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 3, "</div><form class=\"registration-form\">")
+		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 3, "</div><form class=\"registration-form\" hx-post=\"/register_user\" hx-trigger=\"submit\" hx-target=\"#registration-result\" hx-swap=\"innerHTML swap:0.5s\"><div class=\"registration-form__inputs\">")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
@@ -63,7 +63,7 @@ func RegistrationForm() templ.Component {
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 4, "<div class=\"registration-form-button\">")
+		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 4, "</div><div class=\"registration-form-button\">")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
@@ -118,7 +118,7 @@ func RegistrationFormStyle() templ.Component {
 			templ_7745c5c3_Var3 = templ.NopComponent
 		}
 		ctx = templ.ClearChildren(ctx)
-		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 7, "<style>\n        .registration-container {\n            max-width: 500px;\n            margin: 0 auto;\n            padding-top: 118px;\n            padding-bottom: 158px;\n            display: flex;\n            flex-direction: column;\n            align-items: center;\n        }\n\n        .registration-form__title {\n            padding-bottom: 40px;\n            text-align: center;\n            width: 100%; /* Важно: занимает всю ширину контейнера */\n        }\n\n        .registration-form {\n            display: flex;\n            flex-direction: column;\n            gap: 51px;\n            width: 100%; /* Форма занимает всю доступную ширину */\n            align-items: center; /* Центрируем элементы формы */\n        }\n\n        .registration-form-button {\n            width: 100%;\n            display: flex;\n            justify-content: center; /* Центрируем кнопку по горизонтали */\n        }\n\n        /* Остальные стили остаются без изменений */\n        .form-group {\n            display: flex;\n            flex-direction: column;\n            gap: 5px;\n            width: 100%; /* Группы полей занимают всю ширину формы */\n            max-width: 400px; /* Ограничиваем ширину полей ввода */\n        }\n\n        /* Добавляем для кнопки, если нужно */\n        .submit-button {\n            width: auto; /* или конкретное значение, например 200px */\n            margin: 0 auto; /* Дополнительное центрирование */\n        }\n\n        /* ... остальные ваши стили ... */\n    </style>")
+		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 7, "<style>\n        .registration-container {\n            max-width: 500px;\n            margin: 0 auto;\n            padding-top: 118px;\n            padding-bottom: 158px;\n            display: flex;\n            flex-direction: column;\n            align-items: center;\n        }\n\n        .registration-form__title {\n            padding-bottom: 40px;\n            text-align: center;\n            width: 100%;\n        }\n\n        .registration-form {\n            display: flex;\n            flex-direction: column;\n            width: 100%;\n            align-items: center;\n        }\n\n        .registration-form__inputs {\n            display: flex;\n            flex-direction: column;\n            gap: 41px; /* Вот здесь устанавливаем отступ 51px между полями */\n            width: 100%;\n            margin-bottom: 41px; /* Добавляем отступ перед кнопкой */\n        }\n\n        .registration-form-button {\n            width: 100%;\n            display: flex;\n            justify-content: center;\n        }\n\n        .form-group {\n            display: flex;\n            flex-direction: column;\n            gap: 5px;\n            width: 100%;\n            max-width: 400px;\n        }\n\n        .submit-button {\n            width: auto;\n            margin: 0 auto;\n        }\n\n        /* Стили для лоадера и других элементов */\n        .registration-form__submit {\n            display: inline-block;\n        }\n\n        .htmx-request .registration-form__submit {\n            display: none;\n        }\n\n        .registration-form__loader {\n            display: none;\n        }\n\n        .htmx-request .registration-form__loader {\n            display: block;\n            width: 24px;\n            height: 24px;\n            border: 2px solid #FFF;\n            border-radius: 50%;\n            position: relative;\n            box-sizing: border-box;\n            animation: rotation 1s linear infinite;\n            margin: 0 auto;\n        }\n\n        @keyframes rotation {\n            0% { transform: rotate(0deg); }\n            100% { transform: rotate(360deg); }\n        }\n    </style>")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
