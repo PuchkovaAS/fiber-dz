@@ -25,9 +25,8 @@ func NewHandler(router fiber.Router, customLogger *slog.Logger) {
 		customLogger: customLogger,
 	}
 
-	authGroup := router.Group("/api/register")
-	authGroup.Get("/", h.register)
-	authGroup.Post("/", h.createUser)
+	authGroup := router.Group("/api")
+	authGroup.Post("/register", h.createUser)
 }
 
 func (h *AuthHandler) createUser(c *fiber.Ctx) error {
@@ -67,54 +66,5 @@ func (h *AuthHandler) createUser(c *fiber.Ctx) error {
 			components.NotificationSuccess,
 		)
 	}
-	return templeadapter.Render(c, component)
-}
-
-func (h *AuthHandler) register(c *fiber.Ctx) error {
-	tags := []views.TagData{
-		{
-			Name:    "Еда",
-			PathImg: "./public/images/food/01.png",
-			Url:     "/",
-		},
-		{
-			Name:    "Животные",
-			PathImg: "/public/images/animal/10.png",
-			Url:     "/",
-		},
-
-		{
-			Name:    "Машины",
-			PathImg: "/public/images/car/04.png",
-
-			Url: "/",
-		},
-
-		{
-			Name:    "Спорт",
-			PathImg: "/public/images/sport/06.png",
-			Url:     "/",
-		},
-
-		{
-			Name:    "Музыка",
-			PathImg: "/public/images/music/06.png",
-			Url:     "/",
-		},
-
-		{
-			Name:    "Технологии",
-			PathImg: "/public/images/technology/03.png",
-			Url:     "/",
-		},
-
-		{
-			Name:    "Прочее",
-			PathImg: "/public/images/abstract/07.png",
-			Url:     "/",
-		},
-	}
-	component := views.Registration(tags)
-
 	return templeadapter.Render(c, component)
 }
