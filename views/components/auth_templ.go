@@ -33,7 +33,7 @@ func Auth() templ.Component {
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 1, "<div class=\"auth\"><a href=\"/login\" class=\"auth-link\">Вход</a> <a href=\"/register\" class=\"auth-link\">Регистрация</a></div>")
+		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 1, "<div class=\"auth\"><a href=\"/api/login\" class=\"auth-link\">Вход</a> <a href=\"/api/register\" class=\"auth-link\">Регистрация</a></div>")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}

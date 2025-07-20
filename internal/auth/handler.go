@@ -25,7 +25,7 @@ func NewHandler(router fiber.Router, customLogger *slog.Logger) {
 		customLogger: customLogger,
 	}
 
-	authGroup := router.Group("/register")
+	authGroup := router.Group("/api/register")
 	authGroup.Get("/", h.register)
 	authGroup.Post("/", h.createUser)
 }
