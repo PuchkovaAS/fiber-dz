@@ -1,0 +1,47 @@
+package components
+
+type InputProps struct {
+	Placeholder string
+	Name        string
+}
+
+templ Input(props InputProps) {
+	@InputStyle()
+	<div class="input-box">
+		<div class="input-title">{ props.Placeholder }</div>
+		<input name={ props.Name } class="input"/>
+	</div>
+}
+
+templ InputStyle() {
+	<style>
+        .input-box {
+            position: relative;
+            margin-top: 15px; /* Space for the floating label */
+            text-align: left; /* Выравнивание по левому краю */
+        }
+
+        .input-title {
+            font-size: var(--h5-font-size);
+            font-weight: var(--h5-font-weight);
+            color: var(--color-dark75);
+            position: absolute;
+            top: -25px;
+            left: 5px;
+            background: white;
+            text-align: left; /* Явное выравнивание по левому краю */
+            width: 100%; /* Чтобы текст не переносился */
+        }
+
+        .input {
+            border-radius: 12px;
+            width: 488px;
+            height: 48px;
+            background: var(--color-gray);
+            border: none;
+            padding-left: 8px;
+            position: relative;
+            text-align: left; /* Выравнивание текста ввода по левому краю */
+        }
+    </style>
+}

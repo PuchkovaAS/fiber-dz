@@ -1,0 +1,36 @@
+package components
+
+templ SubmitButton() {
+	@SubmitButtonStyle()
+	<button class="submit-button">
+		{ children... }
+	</button>
+}
+
+templ SubmitButtonStyle() {
+	<style>
+        .submit-button {
+            border-radius: 12px;
+            padding: 10px 16px;
+            height: 40px;
+            box-sizing: border-box;  /* Добавил box-sizing */
+            
+            background-color: var(--color-primary);
+            color: var(--color-white);
+            text-decoration: none;
+            border: none;
+            cursor: pointer;
+            font-size: var(--ag-buton-font-size);
+            font-weight: var(--ag-buton-font-weight);
+            
+            display: inline-flex;  /* Изменил на inline-flex */
+            align-items: center;   /* Выравнивание по вертикали */
+            justify-content: center; /* Выравнивание по горизонтали */
+            white-space: nowrap;  /* Запрет переноса текста */
+        }
+
+        .submit-button:hover {
+            background-color: var(--color-primary-hover);
+        }
+    </style>
+}

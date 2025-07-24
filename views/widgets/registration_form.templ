@@ -1,0 +1,116 @@
+package widgets
+
+import "fiber-dz/views/components"
+
+templ RegistrationForm() {
+	<div class="registration-container">
+		@RegistrationFormStyle()
+		<div id="registration-result"></div>
+		<div class="registration-form__title">
+			@components.TitleRed("Регистрация на сайте")
+		</div>
+		<form
+			class="registration-form"
+			hx-post="api/register"
+			hx-trigger="submit"
+			hx-target="#registration-result"
+			hx-swap="innerHTML swap:0.5s"
+		>
+			<div class="registration-form__inputs">
+				@components.Input(components.InputProps{Placeholder: "Имя", Name: "name"})
+				@components.Input(components.InputProps{Placeholder: "Email", Name: "email"})
+				@components.Input(components.InputProps{Placeholder: "Пароль", Name: "password"})
+			</div>
+			<div class="registration-form-button">
+				@components.SubmitButton() {
+					<span class="registration-form__submit">Зарегистрироваться</span>
+					<span class="registration-form__loader"></span>
+				}
+			</div>
+		</form>
+	</div>
+}
+
+templ RegistrationFormStyle() {
+	<style>
+        .registration-container {
+            max-width: 500px;
+            margin: 0 auto;
+            padding-top: 118px;
+            padding-bottom: 158px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .registration-form__title {
+            padding-bottom: 40px;
+            text-align: center;
+            width: 100%;
+        }
+
+        .registration-form {
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+            align-items: center;
+        }
+
+        .registration-form__inputs {
+            display: flex;
+            flex-direction: column;
+            gap: 41px; /* Вот здесь устанавливаем отступ 51px между полями */
+            width: 100%;
+            margin-bottom: 41px; /* Добавляем отступ перед кнопкой */
+        }
+
+        .registration-form-button {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+            width: 100%;
+            max-width: 400px;
+        }
+
+        .submit-button {
+            width: auto;
+            margin: 0 auto;
+        }
+
+        /* Стили для лоадера и других элементов */
+        .registration-form__submit {
+            display: inline-block;
+        }
+
+        .htmx-request .registration-form__submit {
+            display: none;
+        }
+
+        .registration-form__loader {
+            display: none;
+        }
+
+        .htmx-request .registration-form__loader {
+            display: block;
+            width: 24px;
+            height: 24px;
+            border: 2px solid #FFF;
+            border-radius: 50%;
+            position: relative;
+            box-sizing: border-box;
+            animation: rotation 1s linear infinite;
+            margin: 0 auto;
+        }
+
+        @keyframes rotation {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+}
