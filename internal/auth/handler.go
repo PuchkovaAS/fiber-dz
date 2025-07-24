@@ -5,6 +5,7 @@ import (
 	"fiber-dz/pkg/validator"
 	"fiber-dz/views/components"
 	"log/slog"
+	"net/http"
 
 	"github.com/a-h/templ"
 	"github.com/gobuffalo/validate"
@@ -41,7 +42,6 @@ func (h *AuthHandler) createUser(c *fiber.Ctx) error {
 		Name:     c.FormValue("name"),
 		Password: c.FormValue("password"),
 	}
-	h.customLogger.Info("%s", form.Email)
 
 	error := validate.Validate(
 		&validators.EmailIsPresent{
@@ -66,7 +66,7 @@ func (h *AuthHandler) createUser(c *fiber.Ctx) error {
 			validator.FormatErrors(error),
 			components.NotificationFail,
 		)
-		return templeadapter.Render(c, component)
+		return templeadapter.Render(c, component, http.StatusBadRequest)
 	}
 
 	if err := h.service.Register(form); err != nil {
@@ -74,12 +74,13 @@ func (h *AuthHandler) createUser(c *fiber.Ctx) error {
 			err.Error(),
 			components.NotificationFail,
 		)
+		return templeadapter.Render(c, component, http.StatusBadRequest)
 	} else {
 		component = components.Notification(
-			"Регистрация прошла успешно"+form.Email,
+			"Регистрация прошла успешно"+":  "+form.Email,
 			components.NotificationSuccess,
 		)
 	}
 
-	return templeadapter.Render(c, component)
+	return templeadapter.Render(c, component, http.StatusCreated)
 }
