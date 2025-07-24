@@ -1,6 +1,7 @@
 package auth
 
 import (
+	"fiber-dz/internal/users"
 	"fiber-dz/pkg/validator"
 	"fiber-dz/views/components"
 	"log/slog"
@@ -16,12 +17,18 @@ import (
 type AuthHandler struct {
 	router       fiber.Router
 	customLogger *slog.Logger
+	service      AuthService
 }
 
-func NewHandler(router fiber.Router, customLogger *slog.Logger) {
+func NewHandler(
+	router fiber.Router,
+	customLogger *slog.Logger,
+	service AuthService,
+) {
 	h := &AuthHandler{
 		router:       router,
 		customLogger: customLogger,
+		service:      service,
 	}
 
 	authGroup := router.Group("/api")
@@ -29,7 +36,7 @@ func NewHandler(router fiber.Router, customLogger *slog.Logger) {
 }
 
 func (h *AuthHandler) createUser(c *fiber.Ctx) error {
-	form := AuthRegisterForm{
+	form := users.UserCreateForm{
 		Email:    c.FormValue("email"),
 		Name:     c.FormValue("name"),
 		Password: c.FormValue("password"),
@@ -59,11 +66,20 @@ func (h *AuthHandler) createUser(c *fiber.Ctx) error {
 			validator.FormatErrors(error),
 			components.NotificationFail,
 		)
+		return templeadapter.Render(c, component)
+	}
+
+	if err := h.service.Register(form); err != nil {
+		component = components.Notification(
+			err.Error(),
+			components.NotificationFail,
+		)
 	} else {
 		component = components.Notification(
-			"Регистрация прошла успешно",
+			"Регистрация прошла успешно"+form.Email,
 			components.NotificationSuccess,
 		)
 	}
+
 	return templeadapter.Render(c, component)
 }
