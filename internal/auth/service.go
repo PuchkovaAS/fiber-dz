@@ -5,6 +5,7 @@ import (
 	"fiber-dz/internal/users"
 	"fiber-dz/pkg/di"
 
+	"github.com/jordan-wright/email"
 	"golang.org/x/crypto/bcrypt"
 )
 
@@ -33,8 +34,8 @@ func (service *AuthService) Register(
 	}
 
 	err = service.UserRepository.Create(
-		createUserForm.Name,
 		createUserForm.Email,
+		createUserForm.Name,
 		string(hashedPassword),
 	)
 	if err != nil {
