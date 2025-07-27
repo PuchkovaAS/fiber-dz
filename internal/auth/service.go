@@ -5,7 +5,6 @@ import (
 	"fiber-dz/internal/users"
 	"fiber-dz/pkg/di"
 
-	"github.com/jordan-wright/email"
 	"golang.org/x/crypto/bcrypt"
 )
 

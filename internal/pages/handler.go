@@ -3,6 +3,7 @@ package pages
 import (
 	"fiber-dz/views"
 	"log/slog"
+	"net/http"
 
 	"github.com/gofiber/fiber/v2"
 
@@ -69,7 +70,7 @@ func (h *PagesHandler) register(c *fiber.Ctx) error {
 	}
 	component := views.Registration(tags)
 
-	return templeadapter.Render(c, component)
+	return templeadapter.Render(c, component, http.StatusOK)
 }
 
 func (h *PagesHandler) home(c *fiber.Ctx) error {
@@ -118,5 +119,5 @@ func (h *PagesHandler) home(c *fiber.Ctx) error {
 	}
 	component := views.Main(tags)
 
-	return templeadapter.Render(c, component)
+	return templeadapter.Render(c, component, http.StatusOK)
 }

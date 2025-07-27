@@ -10,6 +10,7 @@ templ RegistrationForm() {
 			@components.TitleRed("Регистрация на сайте")
 		</div>
 		<form
+			hx-ext="response-targets"
 			class="registration-form"
 			hx-post="api/register"
 			hx-trigger="submit"
