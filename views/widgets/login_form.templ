@@ -1,0 +1,124 @@
+
+package widgets
+
+import "fiber-dz/views/components"
+
+templ LoginForm() {
+	<div class="login-container">
+		@LoginFormStyle()
+		<div class="login-form__title">
+			@components.TitleRed("Войти на сайт")
+		</div>
+		<div id="login-result"></div>
+		<form
+			hx-ext="response-targets"
+			hx-post="/api/login"
+			hx-trigger="submit"
+			hx-target="#login-result"
+			hx-target-error="#login-result"
+			data-400="#login-result"
+			hx-swap="innerHTML"
+			hx-indicator=".login-form__loader"
+			class="login-form"
+		>
+			<div class="login-form__inputs">
+				@components.Input(components.InputProps{Placeholder: "Email", Name: "email"})
+				@components.Input(components.InputProps{Placeholder: "Пароль", Name: "password", Type: "password"})
+			</div>
+			<div class="login-form-button">
+				@components.SubmitButton() {
+					<span class="login-form__submit">Войти</span>
+					<span class="login-form__loader"></span>
+				}
+			</div>
+		</form>
+	</div>
+}
+
+templ LoginFormStyle() {
+	<style>
+#login-result {
+    width: 100%;
+    margin: 1rem 0;
+}
+        .login-container {
+            max-width: 500px;
+            margin: 0 auto;
+            padding-top: 118px;
+            padding-bottom: 158px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .login-form__title {
+            padding-bottom: 40px;
+            text-align: center;
+            width: 100%;
+        }
+
+        .login-form {
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+            align-items: center;
+        }
+
+        .login-form__inputs {
+            display: flex;
+            flex-direction: column;
+            gap: 41px; /* Вот здесь устанавливаем отступ 51px между полями */
+            width: 100%;
+            margin-bottom: 41px; /* Добавляем отступ перед кнопкой */
+        }
+
+        .login-form-button {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+            width: 100%;
+            max-width: 400px;
+        }
+
+        .submit-button {
+            width: auto;
+            margin: 0 auto;
+        }
+
+        /* Стили для лоадера и других элементов */
+        .login-form__submit {
+            display: inline-block;
+        }
+
+        .htmx-request .login-form__submit {
+            display: none;
+        }
+
+        .login-form__loader {
+            display: none;
+        }
+
+        .htmx-request .login-form__loader {
+            display: block;
+            width: 24px;
+            height: 24px;
+            border: 2px solid #FFF;
+            border-radius: 50%;
+            position: relative;
+            box-sizing: border-box;
+            animation: rotation 1s linear infinite;
+            margin: 0 auto;
+        }
+
+        @keyframes rotation {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+}

@@ -24,7 +24,17 @@ templ Header() {
 			</div>
 			<div class="header-right">
 				@components.SearchPanel()
-				@components.Auth()
+				{{ email := ctx.Value("email").(string) }}
+				if email == "" {
+					@components.Auth()
+				} else {
+					<span class="menu__right-email">{ email } </span>
+					<a
+						class="menu_right-link"
+						hx-get="/api/logout"
+						hx-trigger="click"
+					>Logout</a>
+				}
 			</div>
 		</div>
 	</header>
@@ -125,6 +135,20 @@ templ HeaderStyle() {
     
     .categories:hover .dropdown-icon {
         transform: rotate(180deg);
+    }
+    .menu_right-link {
+        text-decoration: none;
+        color: var(--color-primary);
+        font-size: 16px;
+        cursor: pointer;
+    }
+
+    .menu_right-link:hover {
+        color: #9f9f9f;
+    }
+    .menu__right-email {
+
+        color: var(--color-primary);
     }
     </style>
 }

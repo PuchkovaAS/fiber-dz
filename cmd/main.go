@@ -7,9 +7,13 @@ import (
 	"fiber-dz/internal/users"
 	"fiber-dz/pkg/database"
 	"fiber-dz/pkg/logger"
+	"fiber-dz/pkg/middleware"
+	"time"
 
 	"github.com/gofiber/fiber/v2"
 	"github.com/gofiber/fiber/v2/middleware/recover"
+	"github.com/gofiber/fiber/v2/middleware/session"
+	"github.com/gofiber/storage/postgres/v3"
 	slogfiber "github.com/samber/slog-fiber"
 )
 
@@ -31,6 +35,18 @@ func main() {
 	dbpool := database.NewDbPool(dbConfig, logger)
 	defer dbpool.Close()
 
+	storage := postgres.New(postgres.Config{
+		DB:         dbpool,
+		Table:      "sessions",
+		Reset:      false,
+		GCInterval: 10 * time.Second,
+	})
+
+	store := session.New(session.Config{
+		Storage: storage,
+	})
+	app.Use(middleware.AuthMiddleware(store))
+
 	// repositories
 	userRepository := users.NewUsersRepository(
 		dbpool,
@@ -42,6 +58,6 @@ func main() {
 
 	// handlers
 	pages.NewHandler(app, logger)
-	auth.NewHandler(app, logger, *authService)
+	auth.NewHandler(app, logger, *authService, store)
 	app.Listen(":3000")
 }
