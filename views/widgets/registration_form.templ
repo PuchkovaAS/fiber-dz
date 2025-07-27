@@ -15,7 +15,6 @@ templ RegistrationForm() {
 			hx-trigger="submit"
 			hx-target="#registration-result"
 			hx-swap="innerHTML swap:0.5s"
-			hx-on::after-request="if(event.detail.successful) this.reset()"
 		>
 			<div class="registration-form__inputs">
 				@components.Input(components.InputProps{Placeholder: "Имя", Name: "name"})
