@@ -2,7 +2,6 @@ package auth
 
 import (
 	"errors"
-	"fiber-dz/internal/users"
 	"fiber-dz/pkg/di"
 
 	"golang.org/x/crypto/bcrypt"
@@ -16,8 +15,28 @@ func NewAuthService(userRepository di.IUserRepository) *AuthService {
 	return &AuthService{userRepository}
 }
 
+func (service *AuthService) Login(
+	loginUserForm userLoginForm,
+) error {
+	existedUser, _ := service.UserRepository.FindByEmail(loginUserForm.Email)
+
+	if existedUser == nil {
+		return errors.New(ErrWrongCredentials)
+	}
+
+	err := bcrypt.CompareHashAndPassword(
+		[]byte(existedUser.Password),
+		[]byte(loginUserForm.Password),
+	)
+	if err != nil {
+		return errors.New(ErrWrongCredentials)
+	}
+
+	return nil
+}
+
 func (service *AuthService) Register(
-	createUserForm users.UserCreateForm,
+	createUserForm userCreateForm,
 ) error {
 	existedUser, _ := service.UserRepository.FindByEmail(createUserForm.Email)
 

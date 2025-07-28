@@ -1,41 +1,47 @@
+
 package widgets
 
 import "fiber-dz/views/components"
 
-templ RegistrationForm() {
-	<div class="registration-container">
-		@RegistrationFormStyle()
-		<div id="registration-result"></div>
-		<div class="registration-form__title">
-			@components.TitleRed("Регистрация на сайте")
+templ LoginForm() {
+	<div class="login-container">
+		@LoginFormStyle()
+		<div class="login-form__title">
+			@components.TitleRed("Войти на сайт")
 		</div>
+		<div id="login-result"></div>
 		<form
 			hx-ext="response-targets"
-			class="registration-form"
-			hx-post="api/register"
+			hx-post="/api/login"
 			hx-trigger="submit"
-			hx-target="#registration-result"
-			hx-swap="innerHTML swap:0.5s"
-			hx-on::after-request="if(event.detail.successful) this.reset()"
+			hx-target="#login-result"
+			hx-target-error="#login-result"
+			data-400="#login-result"
+			hx-swap="innerHTML"
+			hx-indicator=".login-form__loader"
+			class="login-form"
 		>
-			<div class="registration-form__inputs">
-				@components.Input(components.InputProps{Placeholder: "Имя", Name: "name"})
+			<div class="login-form__inputs">
 				@components.Input(components.InputProps{Placeholder: "Email", Name: "email"})
 				@components.Input(components.InputProps{Placeholder: "Пароль", Name: "password", Type: "password"})
 			</div>
-			<div class="registration-form-button">
+			<div class="login-form-button">
 				@components.SubmitButton() {
-					<span class="registration-form__submit">Зарегистрироваться</span>
-					<span class="registration-form__loader"></span>
+					<span class="login-form__submit">Войти</span>
+					<span class="login-form__loader"></span>
 				}
 			</div>
 		</form>
 	</div>
 }
 
-templ RegistrationFormStyle() {
+templ LoginFormStyle() {
 	<style>
-        .registration-container {
+#login-result {
+    width: 100%;
+    margin: 1rem 0;
+}
+        .login-container {
             max-width: 500px;
             margin: 0 auto;
             padding-top: 118px;
@@ -45,20 +51,20 @@ templ RegistrationFormStyle() {
             align-items: center;
         }
 
-        .registration-form__title {
+        .login-form__title {
             padding-bottom: 40px;
             text-align: center;
             width: 100%;
         }
 
-        .registration-form {
+        .login-form {
             display: flex;
             flex-direction: column;
             width: 100%;
             align-items: center;
         }
 
-        .registration-form__inputs {
+        .login-form__inputs {
             display: flex;
             flex-direction: column;
             gap: 41px; /* Вот здесь устанавливаем отступ 51px между полями */
@@ -66,7 +72,7 @@ templ RegistrationFormStyle() {
             margin-bottom: 41px; /* Добавляем отступ перед кнопкой */
         }
 
-        .registration-form-button {
+        .login-form-button {
             width: 100%;
             display: flex;
             justify-content: center;
@@ -86,19 +92,19 @@ templ RegistrationFormStyle() {
         }
 
         /* Стили для лоадера и других элементов */
-        .registration-form__submit {
+        .login-form__submit {
             display: inline-block;
         }
 
-        .htmx-request .registration-form__submit {
+        .htmx-request .login-form__submit {
             display: none;
         }
 
-        .registration-form__loader {
+        .login-form__loader {
             display: none;
         }
 
-        .htmx-request .registration-form__loader {
+        .htmx-request .login-form__loader {
             display: block;
             width: 24px;
             height: 24px;

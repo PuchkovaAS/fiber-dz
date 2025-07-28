@@ -3,13 +3,20 @@ package components
 type InputProps struct {
 	Placeholder string
 	Name        string
+	Type        string
 }
 
 templ Input(props InputProps) {
 	@InputStyle()
 	<div class="input-box">
 		<div class="input-title">{ props.Placeholder }</div>
-		<input name={ props.Name } class="input"/>
+		<input
+			name={ props.Name }
+			class="input"
+			if props.Type != "" {
+				type={ props.Type }
+			}
+		/>
 	</div>
 }
 

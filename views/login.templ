@@ -1,0 +1,25 @@
+
+package views
+
+import (
+	"fiber-dz/views/components"
+	"fiber-dz/views/layout"
+	"fiber-dz/views/widgets"
+)
+
+templ Login(tags []TagData) {
+	@layout.Layout(layout.LayoutProps{
+		Title:           "Войти на сайт",
+		MetaDescription: "Просто сайт"})
+	<main>
+		@layout.Header() {
+			for _, tag := range tags {
+				@components.Category(tag.Name, tag.Url)
+			}
+		}
+		@widgets.LoginForm()
+	</main>
+	<footer style="margin-top: auto; padding-bottom: 102px;">
+		@layout.Copyright()
+	</footer>
+}
