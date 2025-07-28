@@ -28,12 +28,18 @@ templ Header() {
 				if email == "" {
 					@components.Auth()
 				} else {
-					<span class="menu__right-email">{ email } </span>
-					<a
-						class="menu_right-link"
-						hx-get="/api/logout"
-						hx-trigger="click"
-					>Logout</a>
+					<div class="profile-dropdown">
+						<div class="menu__right-avatar"></div>
+						<span class="menu__right-email">{ email }</span>
+						<div class="dropdown-menu">
+							<a class="menu_right-link" hx-get="/api/profile" hx-trigger="click">
+								Профиль
+							</a>
+							<a class="menu_right-link" hx-get="/api/logout" hx-trigger="click">
+								Выйти
+							</a>
+						</div>
+					</div>
 				}
 			</div>
 		</div>
@@ -148,7 +154,40 @@ templ HeaderStyle() {
     }
     .menu__right-email {
 
-        color: var(--color-primary);
+        color: var(--color-black);
+        font-size: var(--h5-font-size);
+        font-weight: var(--h5-font-weight);
     }
+    .menu__right-avatar {
+        position: relative;
+        width: 48px;
+        height: 48px;
+        border-radius: 12px;
+        background-image: url(./public/images/avatar/12.png);
+        background-size: cover;
+        background-position: 50% 50%;
+    }
+/* Выпадающее меню профиля */
+.header-right {
+    position: relative; /* Важно для позиционирования меню */
+}
+
+.header-right:hover .dropdown-menu {
+    display: block;
+    right: 0; /* Выравниваем по правому краю */
+    left: auto; /* Отменяем left: 0 из общего стиля */
+}
+
+.menu__right-avatar:hover + .dropdown-menu,
+.dropdown-menu:hover {
+    display: block;
+}
+.profile-dropdown {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    cursor: pointer;
+}
     </style>
 }
