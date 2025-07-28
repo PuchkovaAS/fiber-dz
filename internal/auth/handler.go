@@ -148,5 +148,13 @@ func (h *AuthHandler) createUser(c *fiber.Ctx) error {
 		)
 	}
 
+	sess, err := h.store.Get(c)
+	if err != nil {
+		panic(err)
+	}
+	sess.Set("email", form.Email)
+	if err := sess.Save(); err != nil {
+		panic(err)
+	}
 	return templeadapter.Render(c, component, http.StatusCreated)
 }
