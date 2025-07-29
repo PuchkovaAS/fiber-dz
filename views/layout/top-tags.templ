@@ -1,12 +1,13 @@
-
 package layout
 
 templ TopTagsLayout() {
 	@TopTagsLayoutStyle()
-	<div class="top-tag-panel">
-		<div class="top-tags-wrapper">
-			<div class="top-tags-scroller">
-				{ children... }
+	<div class="top-tags-container">
+		<div class="top-tag-panel">
+			<div class="top-tags-wrapper">
+				<div class="top-tags-scroller">
+					{ children... }
+				</div>
 			</div>
 		</div>
 	</div>
@@ -14,10 +15,18 @@ templ TopTagsLayout() {
 
 templ TopTagsLayoutStyle() {
 	<style>
+    .top-tags-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+    }
+
     .top-tag-panel {
         width: 100%;
+        max-width: 1512px;
         padding: 20px 0;
-        overflow-x: hidden;
+        overflow: hidden;
     }
 
     .top-tags-wrapper {
@@ -25,35 +34,38 @@ templ TopTagsLayoutStyle() {
         max-width: 1200px;
         margin: 0 auto;
         padding: 0 20px;
+        justify-content: center;
     }
 
     .top-tags-scroller {
         display: flex;
-        gap: 20px;
-        overflow-x: auto;
+        gap: 10px;
+        lex-wrap: wrap;
+        /* Переносим элементы на новую строку */
+        justify-content: center;
+        /* Центрируем элементы */
         padding-bottom: 20px;
         scrollbar-width: thin;
         scrollbar-color: var(--color-primary) var(--color-gray);
     }
 
-    /* Стили для скроллбара (опционально) */
+
+    /* Убираем скроллбар */
+    .top-tags-scroller {
+        overflow-x: visible;
+        scrollbar-width: none;
+        -ms-overflow-style: none;
+    }
+
     .top-tags-scroller::-webkit-scrollbar {
-        height: 8px;
+        display: none;
     }
 
-    .top-tags-scroller::-webkit-scrollbar-track {
-        background: var(--color-gray);
-        border-radius: 4px;
-    }
-
-    .top-tags-scroller::-webkit-scrollbar-thumb {
-        background-color: var(--color-primary);
-        border-radius: 4px;
-    }
-
-    /* Чтобы карточки не сжимались */
-    .top-tags-scroller > * {
+    /* Стиль для элементов тегов */
+    .top-tags-scroller>* {
         flex: 0 0 auto;
+        margin: 5px;
+        /* Добавляем отступы между элементами */
     }
-    </style>
+</style>
 }
