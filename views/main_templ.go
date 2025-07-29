@@ -10,6 +10,7 @@ import templruntime "github.com/a-h/templ/runtime"
 
 import "fiber-dz/views/layout"
 import "fiber-dz/views/components"
+import "fiber-dz/views/widgets"
 
 type TagData struct {
 	Name    string
@@ -132,10 +133,10 @@ func Main(tags []TagData) templ.Component {
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
-			templ_7745c5c3_Err = components.TopTag(components.TagInfo{
-				Title:   "Как безопасно водить",
-				Text:    "Длинный текст про то, как можно безопасно водить автомобиль.",
-				ImgPath: "/public/images/car/05.png",
+			templ_7745c5c3_Err = widgets.Gallery([]string{
+				"/public/images/01.png",
+				"/public/images/01.png",
+				"/public/images/01.png",
 			}).Render(ctx, templ_7745c5c3_Buffer)
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
