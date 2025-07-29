@@ -36,10 +36,17 @@ templ Main(tags []TagData) {
 				Text:    "Длинный текст про то, как можно безопасно водить автомобиль.",
 				ImgPath: "/public/images/car/05.png",
 			})
-			@widgets.Gallery([]string{
-				"/public/images/01.png",
-				"/public/images/01.png",
-				"/public/images/01.png",
+			@widgets.Gallery([]components.TagInfo{
+				components.TagInfo{
+					Title:   "Несколько мониторов - Зло!",
+					Text:    "Большинство людей используют несколько мониторов. Сегодня мы разберём почему это может быть очень не",
+					ImgPath: "/public/images/01.png",
+				},
+				components.TagInfo{
+					Title:   "Несколько мониторов - Зло!",
+					Text:    "Большинство людей используют несколько мониторов. Сегодня мы разберём почему это может быть очень не",
+					ImgPath: "/public/images/01.png",
+				},
 			})
 		}
 		@layout.PopularPostsLayout() {

@@ -10,7 +10,7 @@ import templruntime "github.com/a-h/templ/runtime"
 
 import "fiber-dz/views/components"
 
-func Gallery(images []string) templ.Component {
+func Gallery(tagsInfo []components.TagInfo) templ.Component {
 	return templruntime.GeneratedTemplate(func(templ_7745c5c3_Input templruntime.GeneratedComponentInput) (templ_7745c5c3_Err error) {
 		templ_7745c5c3_W, ctx := templ_7745c5c3_Input.Writer, templ_7745c5c3_Input.Context
 		if templ_7745c5c3_CtxErr := ctx.Err(); templ_7745c5c3_CtxErr != nil {
@@ -39,26 +39,52 @@ func Gallery(images []string) templ.Component {
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		for _, img := range images {
+		for _, tagInfo := range tagsInfo {
 			templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 2, "<div class=\"swiper-slide\"><img src=\"")
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
 			var templ_7745c5c3_Var2 string
-			templ_7745c5c3_Var2, templ_7745c5c3_Err = templ.JoinStringErrs(img)
+			templ_7745c5c3_Var2, templ_7745c5c3_Err = templ.JoinStringErrs(tagInfo.ImgPath)
 			if templ_7745c5c3_Err != nil {
-				return templ.Error{Err: templ_7745c5c3_Err, FileName: `views/widgets/gallery.templ`, Line: 11, Col: 19}
+				return templ.Error{Err: templ_7745c5c3_Err, FileName: `views/widgets/gallery.templ`, Line: 11, Col: 31}
 			}
 			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var2))
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
-			templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 3, "\" alt=\"Gallery image\" class=\"w-full h-full object-cover\"></div>")
+			templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 3, "\" alt=\"Gallery image\" class=\"w-full h-full object-cover\"><div class=\"swiper__content\"><h3 class=\"swiper__title\">")
+			if templ_7745c5c3_Err != nil {
+				return templ_7745c5c3_Err
+			}
+			var templ_7745c5c3_Var3 string
+			templ_7745c5c3_Var3, templ_7745c5c3_Err = templ.JoinStringErrs(tagInfo.Title)
+			if templ_7745c5c3_Err != nil {
+				return templ.Error{Err: templ_7745c5c3_Err, FileName: `views/widgets/gallery.templ`, Line: 13, Col: 47}
+			}
+			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var3))
+			if templ_7745c5c3_Err != nil {
+				return templ_7745c5c3_Err
+			}
+			templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 4, "</h3><p class=\"swiper__text\">")
+			if templ_7745c5c3_Err != nil {
+				return templ_7745c5c3_Err
+			}
+			var templ_7745c5c3_Var4 string
+			templ_7745c5c3_Var4, templ_7745c5c3_Err = templ.JoinStringErrs(tagInfo.Text)
+			if templ_7745c5c3_Err != nil {
+				return templ.Error{Err: templ_7745c5c3_Err, FileName: `views/widgets/gallery.templ`, Line: 14, Col: 44}
+			}
+			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var4))
+			if templ_7745c5c3_Err != nil {
+				return templ_7745c5c3_Err
+			}
+			templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 5, "</p></div></div>")
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
 		}
-		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 4, "</div><div class=\"swiper-button-next\">")
+		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 6, "</div><div class=\"swiper-button-next\">")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
@@ -66,7 +92,7 @@ func Gallery(images []string) templ.Component {
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 5, "</div><div class=\"swiper-button-prev\">")
+		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 7, "</div><div class=\"swiper-button-prev\">")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
@@ -74,7 +100,7 @@ func Gallery(images []string) templ.Component {
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 6, "</div><div class=\"swiper-pagination\"></div></div><script>\n    var swiper = new Swiper(\".mySwiper\", {\n        spaceBetween: 30,\n        centeredSlides: true,\n        autoplay: {\n            delay: 2500,\n            disableOnInteraction: false,\n        },\n        pagination: {\n            el: \".swiper-pagination\",\n            clickable: true,\n        },\n        navigation: {\n            nextEl: \".swiper-button-next\",\n            prevEl: \".swiper-button-prev\",\n        },\n    });\n</script>")
+		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 8, "</div><div class=\"swiper-pagination\"></div></div><script>\n    var swiper = new Swiper(\".mySwiper\", {\n        spaceBetween: 30,\n        centeredSlides: true,\n        autoplay: {\n            delay: 2500,\n            disableOnInteraction: false,\n        },\n        pagination: {\n            el: \".swiper-pagination\",\n            clickable: true,\n        },\n        navigation: {\n            nextEl: \".swiper-button-next\",\n            prevEl: \".swiper-button-prev\",\n        },\n    });\n</script>")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
@@ -98,12 +124,12 @@ func GalleryStyle() templ.Component {
 			}()
 		}
 		ctx = templ.InitializeContext(ctx)
-		templ_7745c5c3_Var3 := templ.GetChildren(ctx)
-		if templ_7745c5c3_Var3 == nil {
-			templ_7745c5c3_Var3 = templ.NopComponent
+		templ_7745c5c3_Var5 := templ.GetChildren(ctx)
+		if templ_7745c5c3_Var5 == nil {
+			templ_7745c5c3_Var5 = templ.NopComponent
 		}
 		ctx = templ.ClearChildren(ctx)
-		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 7, "<style>\n    .swiper {\n        border-radius: 12px;\n        width: 100%;\n        max-width: 744px;\n        height: 100%;\n        max-height: 452px;\n    }\n\n    .swiper-slide {\n        text-align: center;\n        font-size: 18px;\n        background: #fff;\n        display: flex;\n        justify-content: center;\n        align-items: center;\n    }\n\n    .swiper-slide img {\n        display: block;\n        width: 100%;\n        height: 100%;\n        object-fit: cover;\n    }\n\n    /* Переопределение стандартных стилей Swiper */\n    .swiper-button-next,\n    .swiper-button-prev {\n        width: 32px;\n        height: 32px;\n        background: none;\n        top: 50%;\n        transform: translateY(-50%);\n        margin-top: 0;\n    }\n\n    .swiper-button-next::after,\n    .swiper-button-prev::after {\n        display: none;\n        /* Скрываем стандартные стрелки Swiper */\n    }\n\n    /* Гарантируем, что наши стрелки видны */\n    .arrow-container {\n        position: relative;\n        z-index: 10;\n    }\n</style>")
+		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 9, "<style>\n    .swiper {\n        border-radius: 12px;\n        width: 100%;\n        max-width: 744px;\n        height: 100%;\n        max-height: 452px;\n    }\n\n    .swiper-slide {\n        text-align: center;\n        font-size: 18px;\n        background: #fff;\n        display: flex;\n        justify-content: center;\n        align-items: center;\n    }\n\n    .swiper-slide img {\n        display: block;\n        width: 100%;\n        height: 100%;\n        object-fit: cover;\n    }\n\n    /* Переопределение стандартных стилей Swiper */\n    .swiper-button-next,\n    .swiper-button-prev {\n        width: 32px;\n        height: 32px;\n        background: none;\n        top: 50%;\n        transform: translateY(-50%);\n        margin-top: 0;\n    }\n\n    .swiper-button-next::after,\n    .swiper-button-prev::after {\n        display: none;\n        /* Скрываем стандартные стрелки Swiper */\n    }\n\n    /* Гарантируем, что наши стрелки видны */\n    .arrow-container {\n        position: relative;\n        z-index: 10;\n    }\n\n    .swiper__content {\n        position: absolute;\n        bottom: 10px;\n        left: 10px;\n        right: 10px;\n        min-height: 117px;\n        padding: 15px;\n        border-radius: 12px;\n        background-color: rgba(255, 255, 255, 0.75);\n        color: var(--color-black);\n        box-sizing: border-box;\n    }\n\n    .swiper__title {\n        font-family: \"Roboto\", sans-serif;\n        font-size: 24px;\n        font-weight: 400;\n        margin: 0 0 12px 0;\n        line-height: 1.3;\n        color: var(--color-black);\n\n        width: 100%;\n        text-align: justify;\n    }\n\n    .swiper__text {\n        font-family: \"Roboto\", sans-serif;\n        font-size: 14px;\n        font-weight: 400;\n        color: var(--color-black-75);\n        margin: 0;\n        line-height: 1.5;\n        display: -webkit-box;\n        -webkit-line-clamp: 3;\n        -webkit-box-orient: vertical;\n        overflow: hidden;\n\n        width: 100%;\n        text-align: justify;\n    }\n</style>")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
