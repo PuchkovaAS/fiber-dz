@@ -1,8 +1,10 @@
 package pages
 
 import (
+	"fiber-dz/internal/news"
 	"fiber-dz/views"
 	"log/slog"
+	"math"
 	"net/http"
 
 	"github.com/gofiber/fiber/v2"
@@ -11,14 +13,20 @@ import (
 )
 
 type PagesHandler struct {
-	router       fiber.Router
-	customLogger *slog.Logger
+	router         fiber.Router
+	customLogger   *slog.Logger
+	newsRepository *news.NewsRepository
 }
 
-func NewHandler(router fiber.Router, customLogger *slog.Logger) {
+func NewHandler(
+	router fiber.Router,
+	customLogger *slog.Logger,
+	newsRepository *news.NewsRepository,
+) {
 	h := &PagesHandler{
-		router:       router,
-		customLogger: customLogger,
+		router:         router,
+		customLogger:   customLogger,
+		newsRepository: newsRepository,
 	}
 	router.Get("/", h.home)
 	router.Get("/register", h.register)
@@ -167,7 +175,23 @@ func (h *PagesHandler) home(c *fiber.Ctx) error {
 			Url:     "/",
 		},
 	}
-	component := views.Main(tags)
+
+	PAGE_ITEMS := 4
+	page := c.QueryInt("page", 1)
+
+	count := h.newsRepository.CountAll()
+	news, err := h.newsRepository.GetAll(PAGE_ITEMS, (page-1)*PAGE_ITEMS)
+	if err != nil {
+		h.customLogger.Error(err.Error())
+		return c.SendStatus(500)
+	}
+
+	component := views.Main(
+		news,
+		int(math.Ceil(float64(count)/float64(PAGE_ITEMS))),
+		page,
+		tags,
+	)
 
 	return templeadapter.Render(c, component, http.StatusOK)
 }

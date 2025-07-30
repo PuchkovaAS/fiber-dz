@@ -1,0 +1,30 @@
+package widgets
+
+import (
+	"fiber-dz/internal/news"
+	"fiber-dz/views/components"
+	"fiber-dz/views/layout"
+	"github.com/rvflash/elapsed"
+)
+
+templ NewsList(newsList []news.News, pagesCount, page int) {
+	@NewsListStyle()
+	@layout.PopularPostsLayout() {
+		for _, news := range newsList {
+			{{ date := elapsed.LocalTime(news.CreatedAt, "ru") }}
+			@components.Card(&components.CardInfo{
+				ImagePath:    news.Preview,
+				Title:        news.Title,
+				AutorName:    "Михаил Аршинов",
+				AutorImgPath: "/public/images/avatar/12.png",
+				Text:         news.Text,
+				Date:         date,
+			})
+		}
+	}
+}
+
+templ NewsListStyle() {
+	<style>
+</style>
+}
