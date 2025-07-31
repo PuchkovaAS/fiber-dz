@@ -1,26 +1,62 @@
 package components
 
-templ ArrowRight() {
+import "fmt"
+
+type ArrowProps struct {
+	Active bool
+	Page   int  // Текущая страница
+	IsNext bool // true для стрелки "вперед", false для "назад"
+}
+
+templ ArrowRight(props ArrowProps) {
 	@ArrowStyle()
-	<div class="arrow-container arrow-right">
-		<svg class="arrow-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-			<path d="M9 18L15 12L9 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
-		</svg>
+	<div class={ "arrow-container" , templ.KV("arrow-right", props.Active), templ.KV("arrow-inactive", !props.Active) }>
+		if props.Active {
+			<a href={ fmt.Sprintf("/?page=%d", props.Page+1) } class="arrow-link">
+				<svg class="arrow-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+					<path
+						d="M9 18L15 12L9 6"
+						stroke="currentColor"
+						stroke-width="2"
+						stroke-linecap="round"
+						stroke-linejoin="round"
+					></path>
+				</svg>
+			</a>
+		} else {
+			<svg class="arrow-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+				<path d="M9 18L15 12L9 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+			</svg>
+		}
 	</div>
 }
 
-templ ArrowLeft() {
+templ ArrowLeft(props ArrowProps) {
 	@ArrowStyle()
-	<div class="arrow-container arrow-left">
-		<svg class="arrow-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-			<path
-				d="M15 18L9 12L15 6"
-				stroke="currentColor"
-				stroke-width="2"
-				stroke-linecap="round"
-				stroke-linejoin="round"
-			></path>
-		</svg>
+	<div class={ "arrow-container" , templ.KV("arrow-left", props.Active), templ.KV("arrow-inactive", !props.Active) }>
+		if props.Active {
+			<a href={ fmt.Sprintf("/?page=%d", props.Page-1) } class="arrow-link">
+				<svg class="arrow-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+					<path
+						d="M15 18L9 12L15 6"
+						stroke="currentColor"
+						stroke-width="2"
+						stroke-linecap="round"
+						stroke-linejoin="round"
+					></path>
+				</svg>
+			</a>
+		} else {
+			<svg class="arrow-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+				<path
+					d="M15 18L9 12L15 6"
+					stroke="currentColor"
+					stroke-width="2"
+					stroke-linecap="round"
+					stroke-linejoin="round"
+				></path>
+			</svg>
+		}
 	</div>
 }
 
@@ -35,9 +71,6 @@ templ ArrowStyle() {
         cursor: pointer;
         border-radius: 50%;
         transition: all 0.2s ease;
-        background: var(--color-gray);
-        /* Добавлен фон */
-
     }
 
     .arrow-right {
@@ -50,6 +83,12 @@ templ ArrowStyle() {
         opacity: 0.8;
     }
 
+    .arrow-inactive {
+        background-color: var(--color-gray);
+        opacity: 0.5;
+        cursor: not-allowed;
+    }
+
     .arrow-icon {
         width: 24px;
         height: 24px;
@@ -57,20 +96,28 @@ templ ArrowStyle() {
         transition: all 0.2s ease;
     }
 
-    .arrow-container:hover {
+    .arrow-link {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+        height: 100%;
+    }
+
+    .arrow-container:hover:not(.arrow-inactive) {
         background-color: var(--color-text-hover);
     }
 
-    .arrow-container:hover .arrow-icon {
+    .arrow-container:hover:not(.arrow-inactive) .arrow-icon {
         transform: translateX(2px);
         color: var(--color-primary);
     }
 
-    .arrow-right:hover {
+    .arrow-right:hover:not(.arrow-inactive) {
         opacity: 1;
     }
 
-    .arrow-left:hover {
+    .arrow-left:hover:not(.arrow-inactive) {
         opacity: 1;
     }
 </style>

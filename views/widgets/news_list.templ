@@ -9,7 +9,7 @@ import (
 
 templ NewsList(newsList []news.News, pagesCount, page int) {
 	@NewsListStyle()
-	@layout.PopularPostsLayout() {
+	@layout.PopularPostsLayout(layout.PopularPostsProps{Page: page, PageCount: pagesCount}) {
 		for _, news := range newsList {
 			{{ date := elapsed.LocalTime(news.CreatedAt, "ru") }}
 			@components.Card(&components.CardInfo{

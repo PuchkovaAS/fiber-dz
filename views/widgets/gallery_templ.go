@@ -88,7 +88,7 @@ func Gallery(tagsInfo []components.TagInfo) templ.Component {
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		templ_7745c5c3_Err = components.ArrowRight().Render(ctx, templ_7745c5c3_Buffer)
+		templ_7745c5c3_Err = components.ArrowRight(components.ArrowProps{Active: true, Page: 1, IsNext: true}).Render(ctx, templ_7745c5c3_Buffer)
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
@@ -96,7 +96,7 @@ func Gallery(tagsInfo []components.TagInfo) templ.Component {
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		templ_7745c5c3_Err = components.ArrowLeft().Render(ctx, templ_7745c5c3_Buffer)
+		templ_7745c5c3_Err = components.ArrowLeft(components.ArrowProps{Active: true, Page: 1, IsNext: true}).Render(ctx, templ_7745c5c3_Buffer)
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}

@@ -47,3 +47,37 @@ func (r *NewsRepository) GetAll(limit, offset int) ([]News, error) {
 
 	return news, nil
 }
+
+type SearchParam struct {
+	Limit    int
+	Offset   int
+	Category string
+	Keyword  string
+}
+
+func (r *NewsRepository) GetByParam(param SearchParam) ([]News, error) {
+	query := `
+        SELECT * FROM news 
+        WHERE $1 = ANY(categories)
+        ORDER BY created_at DESC 
+        LIMIT $2 OFFSET $3
+    `
+
+	rows, err := r.Dbpool.Query(
+		context.Background(),
+		query,
+		param.Category, // $1
+		param.Limit,    // $2
+		param.Offset,   // $3
+	)
+	if err != nil {
+		return nil, err
+	}
+
+	news, err := pgx.CollectRows(rows, pgx.RowToStructByName[News])
+	if err != nil {
+		return nil, err
+	}
+
+	return news, nil
+}

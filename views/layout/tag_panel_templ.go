@@ -47,7 +47,7 @@ func TagPanel() templ.Component {
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		templ_7745c5c3_Err = components.ArrowRight().Render(ctx, templ_7745c5c3_Buffer)
+		templ_7745c5c3_Err = components.ArrowRight(components.ArrowProps{Active: true, Page: 1, IsNext: true}).Render(ctx, templ_7745c5c3_Buffer)
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
@@ -80,7 +80,7 @@ func TagPanelStyle() templ.Component {
 			templ_7745c5c3_Var2 = templ.NopComponent
 		}
 		ctx = templ.ClearChildren(ctx)
-		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 4, "<style>\n        .tag-panel-container {\n            padding: 20px 0 20px 0;  /* Верх 45px, низ 60px */\n            width: 100%;\n            max-width: 1512px;\n            margin: 0 auto;\n        }\n\n        .tag-panel {\n            --panel-padding: 20px;\n            width: 100%;\n            height: 68px;\n            background: var(--color-tag);\n            border-radius: 12px;\n            display: flex;\n            align-items: center;\n            position: relative;\n            padding: 0 var(--panel-padding);\n            box-sizing: border-box;\n        }\n\n        .tags-wrapper {\n            flex: 1;\n            overflow: hidden;\n            position: relative;\n            height: 100%;\n            display: flex;\n            align-items: center;\n        }\n\n        .tags-scroller {\n            display: flex;\n            gap: 24px;\n            height: 100%;\n            align-items: center;\n            overflow-x: auto;\n            scrollbar-width: none; /* Firefox */\n            width: calc(100% - 44px); /* 24px arrow + 20px padding */\n        }\n\n        .tags-scroller::-webkit-scrollbar {\n            display: none; /* Chrome/Safari */\n        }\n    </style>")
+		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 4, "<style>\n    .tag-panel-container {\n        padding: 20px 0 20px 0;\n        /* Верх 45px, низ 60px */\n        width: 100%;\n        max-width: 1512px;\n        margin: 0 auto;\n    }\n\n    .tag-panel {\n        --panel-padding: 20px;\n        width: 100%;\n        height: 68px;\n        background: var(--color-tag);\n        border-radius: 12px;\n        display: flex;\n        align-items: center;\n        position: relative;\n        padding: 0 var(--panel-padding);\n        box-sizing: border-box;\n    }\n\n    .tags-wrapper {\n        flex: 1;\n        overflow: hidden;\n        position: relative;\n        height: 100%;\n        display: flex;\n        align-items: center;\n    }\n\n    .tags-scroller {\n        display: flex;\n        gap: 24px;\n        height: 100%;\n        align-items: center;\n        overflow-x: auto;\n        scrollbar-width: none;\n        /* Firefox */\n        width: calc(100% - 44px);\n        /* 24px arrow + 20px padding */\n    }\n\n    .tags-scroller::-webkit-scrollbar {\n        display: none;\n        /* Chrome/Safari */\n    }\n</style>")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}

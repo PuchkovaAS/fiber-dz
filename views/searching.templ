@@ -1,0 +1,38 @@
+package views
+
+import (
+	"fiber-dz/internal/news"
+	"fiber-dz/views/components"
+	"fiber-dz/views/layout"
+	"fiber-dz/views/widgets"
+)
+
+templ Searching(news []news.News, pagesCount, page int, tags []TagData) {
+	@layout.Layout(layout.LayoutProps{
+		Title:           "Категории и поиск",
+		MetaDescription: "Просто сайт"})
+	<main>
+		@layout.Header() {
+			for _, tag := range tags {
+				@components.Category(tag.Name, tag.Url)
+			}
+		}
+		@layout.TagPanel() {
+			for _, tag := range tags {
+				@components.Tag(tag.Name, tag.PathImg, tag.Url)
+			}
+		}
+		<div class="main__news">
+			{{ newsLen := len(news) }}
+			if newsLen > 0 && newsLen > 4 {
+				@widgets.NewsList(news[0:4], pagesCount, page)
+				@widgets.NewsList(news[4:newsLen], pagesCount, page)
+			} else {
+				@widgets.NewsList(news[0:newsLen], pagesCount, page)
+			}
+		</div>
+	</main>
+	<footer style="margin-top: auto; padding-bottom: 102px;">
+		@layout.Copyright()
+	</footer>
+}
