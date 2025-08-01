@@ -1,0 +1,86 @@
+package components
+
+type ButtonHrefProps struct {
+	Label string
+	Href  string
+}
+
+templ ButtonHrefLeft(props ButtonHrefProps) {
+	@ButtonHrefStyle()
+	<a href={ props.Href } class="button-href-link">
+		<div class="button-href-button">
+			<svg class="arrow-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+				<path
+					d="M15 18L9 12L15 6"
+					stroke="currentColor"
+					stroke-width="2"
+					stroke-linecap="round"
+					stroke-linejoin="round"
+				></path>
+			</svg>
+			<span class="button-href-button-label">{ props.Label }</span>
+		</div>
+	</a>
+}
+
+templ ButtonHrefRight(props ButtonHrefProps) {
+	@ButtonHrefStyle()
+	<a href={ props.Href } class="button-href-link">
+		<div class="button-href-button">
+			<span class="button-href-button-label">{ props.Label }</span>
+			<svg class="arrow-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+				<path
+					d="M9 18L15 12L9 6"
+					stroke="currentColor"
+					stroke-width="2"
+					stroke-linecap="round"
+					stroke-linejoin="round"
+				></path>
+			</svg>
+		</div>
+	</a>
+}
+
+templ ButtonHrefStyle() {
+	<style>
+    .arrow-icon {
+        width: 24px;
+        height: 24px;
+        color: var(--color-black);
+        transition: all 0.2s ease;
+    }
+
+    .button-href-link {
+        text-decoration: none;
+        /* Убираем подчеркивание */
+        display: inline-block;
+        /* Для корректных отступов */
+    }
+
+    .button-href-button {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        width: 146px;
+        height: 40px;
+        background-color: var(--color-black-5);
+        border-radius: 12px;
+        cursor: pointer;
+        transition: background-color 0.2s;
+    }
+
+    .button-href-button:hover {
+        background-color: var(--color-text-hover);
+    }
+
+    .button-href-button-label {
+        font-family: var(--font-family);
+        font-weight: var(--text-sm-font-weight);
+        color: var(--color-black-75);
+        font-size: var(--text-sm-font-size);
+        letter-spacing: 0;
+        line-height: var(--text-sm-line-height);
+    }
+</style>
+}

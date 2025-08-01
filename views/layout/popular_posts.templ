@@ -23,11 +23,7 @@ templ PopularPostsLayout(props PopularPostsProps) {
 				{ children... }
 			</div>
 			<div class="popular-posts-button-container">
-				<div class="popular-posts-button">
-					<span class="popular-posts-button-label">Все новости</span>
-					@components.ArrowRight(components.ArrowProps{Active: true,
-						Page: 10, IsNext: true})
-				</div>
+				@components.ButtonHrefRight(components.ButtonHrefProps{Label: "Все новости", Href: "/searching"})
 			</div>
 		</div>
 	</div>
@@ -99,32 +95,6 @@ templ PopularPostsLayoutStyle() {
             display: flex;
             justify-content: center;
             margin-top: 20px;
-        }
-
-        .popular-posts-button {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
-            width: 146px;
-            height: 40px;
-            background-color: var(--color-black-5);
-            border-radius: 12px;
-            cursor: pointer;
-            transition: background-color 0.2s;
-        }
-
-        .popular-posts-button:hover {
-            background-color: var(--color-text-hover);
-        }
-
-        .popular-posts-button-label {
-            font-family: var(--font-family);
-            font-weight: var(--text-sm-font-weight);
-            color: var(--color-black-75);
-            font-size: var(--text-sm-font-size);
-            letter-spacing: 0;
-            line-height: var(--text-sm-line-height);
         }
 
         /* Чтобы карточки не сжимались */

@@ -1,0 +1,119 @@
+package widgets
+
+import (
+	"fiber-dz/internal/news"
+	"fiber-dz/views/components"
+	"fmt"
+	"github.com/rvflash/elapsed"
+	"strings"
+)
+
+templ SearchingList(keyword string, newsList []news.News, pagesCount, page int) {
+	@SearchingListStyle()
+	<div class="searching-list-wrapper">
+		<div class="searching-list-container">
+			<div class="searching-list-container__title">
+				@components.TitleRed(strings.Title(keyword))
+			</div>
+			<div class="searching-list-grid">
+				for _, news := range newsList {
+					{{ date := elapsed.LocalTime(news.CreatedAt, "ru") }}
+					@components.Card(&components.CardInfo{
+						ImagePath:    news.Preview,
+						Title:        news.Title,
+						AutorName:    "Михаил Аршинов",
+						AutorImgPath: "/public/images/avatar/12.png",
+						Text:         news.Text,
+						Date:         date,
+					})
+				}
+			</div>
+			<!-- Контейнер для кнопок пагинации -->
+			<div class="pagination-controls">
+				{{  }}
+				@components.ButtonHrefLeft(components.ButtonHrefProps{
+					Label: "Предыдущая",
+					Href:  fmt.Sprintf("/searching?category=%s&page=%d", keyword, page-1),
+				})
+				<span class="page-info">Страница { page } из { pagesCount }</span>
+				@components.ButtonHrefRight(components.ButtonHrefProps{
+					Label: "Следующая",
+					Href:  fmt.Sprintf("/searching?category=%s&page=%d", keyword, page+1),
+				})
+			</div>
+		</div>
+	</div>
+}
+
+templ SearchingListStyle() {
+	<style>
+    .searching-list-wrapper {
+        display: flex;
+        justify-content: center;
+        width: 100%;
+        padding: 0 20px;
+        box-sizing: border-box;
+    }
+
+    .searching-list-container {
+        padding-top: 45px;
+        max-width: 1512px;
+        width: 100%;
+        margin: 0 auto;
+        display: flex;
+        flex-direction: column;
+        min-height: 100vh;
+    }
+
+    .searching-list-container__title {
+        margin-bottom: 39px;
+    }
+
+    .searching-list-grid {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 23px;
+        row-gap: 23px;
+        margin-bottom: 40px;
+    }
+
+    .pagination-controls {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 20px;
+        margin-top: auto;
+        /* Прижимаем к низу */
+        padding: 30px 0;
+    }
+
+    .page-info {
+        font-family: var(--font-family);
+        color: var(--color-black-75);
+        font-size: 14px;
+    }
+
+    @media (max-width: 1512px) {
+        .searching-list-grid {
+            grid-template-columns: repeat(3, 1fr);
+        }
+    }
+
+    @media (max-width: 1200px) {
+        .searching-list-grid {
+            grid-template-columns: repeat(2, 1fr);
+        }
+    }
+
+    @media (max-width: 768px) {
+        .searching-list-grid {
+            grid-template-columns: 1fr;
+        }
+
+        .pagination-controls {
+            flex-direction: column;
+            gap: 15px;
+        }
+    }
+</style>
+}

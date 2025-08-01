@@ -7,7 +7,7 @@ import (
 	"fiber-dz/views/widgets"
 )
 
-templ Searching(news []news.News, pagesCount, page int, tags []TagData) {
+templ Searching(catigories string, news []news.News, pagesCount, page int, tags []TagData) {
 	@layout.Layout(layout.LayoutProps{
 		Title:           "Категории и поиск",
 		MetaDescription: "Просто сайт"})
@@ -22,14 +22,8 @@ templ Searching(news []news.News, pagesCount, page int, tags []TagData) {
 				@components.Tag(tag.Name, tag.PathImg, tag.Url)
 			}
 		}
-		<div class="main__news">
-			{{ newsLen := len(news) }}
-			if newsLen > 0 && newsLen > 4 {
-				@widgets.NewsList(news[0:4], pagesCount, page)
-				@widgets.NewsList(news[4:newsLen], pagesCount, page)
-			} else {
-				@widgets.NewsList(news[0:newsLen], pagesCount, page)
-			}
+		<div class="searching_card_list">
+			@widgets.SearchingList(catigories, news, pagesCount, page)
 		</div>
 	</main>
 	<footer style="margin-top: auto; padding-bottom: 102px;">

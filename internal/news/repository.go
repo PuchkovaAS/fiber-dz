@@ -2,6 +2,7 @@ package news
 
 import (
 	"context"
+	"fmt"
 	"log/slog"
 
 	"github.com/jackc/pgx/v5"
@@ -21,6 +22,28 @@ func NewNewsRepository(
 		Dbpool:       dbpool,
 		CustomLogger: customLogger,
 	}
+}
+
+type SearchParam struct {
+	Limit    int
+	Offset   int
+	Category string
+	Keyword  string
+}
+
+func (r *NewsRepository) CountByParam(param SearchParam) int {
+	query := "SELECT COUNT(*) FROM news WHERE "
+	args := []any{}
+	argPos := 1
+
+	if param.Category != "" {
+		query += fmt.Sprintf("$%d = ANY(categories)", argPos)
+		args = append(args, param.Category)
+		argPos++
+	}
+	var count int
+	r.Dbpool.QueryRow(context.Background(), query, args...).Scan(&count)
+	return count
 }
 
 func (r *NewsRepository) CountAll() int {
@@ -46,13 +69,6 @@ func (r *NewsRepository) GetAll(limit, offset int) ([]News, error) {
 	}
 
 	return news, nil
-}
-
-type SearchParam struct {
-	Limit    int
-	Offset   int
-	Category string
-	Keyword  string
 }
 
 func (r *NewsRepository) GetByParam(param SearchParam) ([]News, error) {

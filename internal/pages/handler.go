@@ -69,7 +69,7 @@ func GetTags() []views.TagData {
 		{
 			Name:    "Прочее",
 			PathImg: "/public/images/abstract/07.png",
-			Url:     "/searching",
+			Url:     "/searching/Прочее",
 		},
 	}
 }
@@ -126,14 +126,14 @@ func (h *PagesHandler) searching(c *fiber.Ctx) error {
 		h.customLogger.Error(err.Error())
 		return c.SendStatus(http.StatusBadRequest)
 	}
-
-	count := h.newsRepository.CountAll()
-	news, err := h.newsRepository.GetByParam(news.SearchParam{
+	params := news.SearchParam{
 		Limit:    PAGE_ITEMS,
 		Offset:   (query.Page - 1) * PAGE_ITEMS,
 		Category: query.Category,
 		Keyword:  query.Keyword,
-	})
+	}
+	count := h.newsRepository.CountByParam(params)
+	news, err := h.newsRepository.GetByParam(params)
 	if err != nil {
 		h.customLogger.Error(err.Error())
 		return c.SendStatus(500)
@@ -141,6 +141,7 @@ func (h *PagesHandler) searching(c *fiber.Ctx) error {
 
 	tags := GetTags()
 	component := views.Searching(
+		query.Category,
 		news,
 		int(math.Ceil(float64(count)/float64(PAGE_ITEMS))),
 		query.Page,
