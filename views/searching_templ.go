@@ -8,18 +8,14 @@ package views
 import "github.com/a-h/templ"
 import templruntime "github.com/a-h/templ/runtime"
 
-import "fiber-dz/views/layout"
-import "fiber-dz/views/components"
-import "fiber-dz/views/widgets"
-import "fiber-dz/internal/news"
+import (
+	"fiber-dz/internal/news"
+	"fiber-dz/views/components"
+	"fiber-dz/views/layout"
+	"fiber-dz/views/widgets"
+)
 
-type TagData struct {
-	Name    string
-	PathImg string
-	Url     string
-}
-
-func Main(news []news.News, pagesCount, page int, tags []TagData) templ.Component {
+func Searching(catigories string, news []news.News, pagesCount, page int, tags []TagData) templ.Component {
 	return templruntime.GeneratedTemplate(func(templ_7745c5c3_Input templruntime.GeneratedComponentInput) (templ_7745c5c3_Err error) {
 		templ_7745c5c3_W, ctx := templ_7745c5c3_Input.Writer, templ_7745c5c3_Input.Context
 		if templ_7745c5c3_CtxErr := ctx.Err(); templ_7745c5c3_CtxErr != nil {
@@ -41,7 +37,7 @@ func Main(news []news.News, pagesCount, page int, tags []TagData) templ.Componen
 		}
 		ctx = templ.ClearChildren(ctx)
 		templ_7745c5c3_Err = layout.Layout(layout.LayoutProps{
-			Title:           "Просто сайт",
+			Title:           "Категории и поиск",
 			MetaDescription: "Просто сайт"}).Render(ctx, templ_7745c5c3_Buffer)
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
@@ -98,72 +94,15 @@ func Main(news []news.News, pagesCount, page int, tags []TagData) templ.Componen
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		templ_7745c5c3_Var4 := templruntime.GeneratedTemplate(func(templ_7745c5c3_Input templruntime.GeneratedComponentInput) (templ_7745c5c3_Err error) {
-			templ_7745c5c3_W, ctx := templ_7745c5c3_Input.Writer, templ_7745c5c3_Input.Context
-			templ_7745c5c3_Buffer, templ_7745c5c3_IsBuffer := templruntime.GetBuffer(templ_7745c5c3_W)
-			if !templ_7745c5c3_IsBuffer {
-				defer func() {
-					templ_7745c5c3_BufErr := templruntime.ReleaseBuffer(templ_7745c5c3_Buffer)
-					if templ_7745c5c3_Err == nil {
-						templ_7745c5c3_Err = templ_7745c5c3_BufErr
-					}
-				}()
-			}
-			ctx = templ.InitializeContext(ctx)
-			templ_7745c5c3_Err = components.TopTag(components.TagInfo{
-				Title:   "Как безопасно водить",
-				Text:    "Длинный текст про то, как можно безопасно водить автомобиль.",
-				ImgPath: "/public/images/car/05.png",
-			}).Render(ctx, templ_7745c5c3_Buffer)
-			if templ_7745c5c3_Err != nil {
-				return templ_7745c5c3_Err
-			}
-			templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 2, " ")
-			if templ_7745c5c3_Err != nil {
-				return templ_7745c5c3_Err
-			}
-			templ_7745c5c3_Err = components.TopTag(components.TagInfo{
-				Title:   "Как безопасно водить",
-				Text:    "Длинный текст про то, как можно безопасно водить автомобиль.",
-				ImgPath: "/public/images/car/05.png",
-			}).Render(ctx, templ_7745c5c3_Buffer)
-			if templ_7745c5c3_Err != nil {
-				return templ_7745c5c3_Err
-			}
-			templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 3, " ")
-			if templ_7745c5c3_Err != nil {
-				return templ_7745c5c3_Err
-			}
-			templ_7745c5c3_Err = widgets.Gallery([]components.TagInfo{
-				components.TagInfo{
-					Title:   "Несколько мониторов - Зло!",
-					Text:    "Большинство людей используют несколько мониторов. Сегодня мы разберём почему это может быть очень не",
-					ImgPath: "/public/images/01.png",
-				},
-				components.TagInfo{
-					Title:   "Несколько мониторов - Зло!",
-					Text:    "Большинство людей используют несколько мониторов. Сегодня мы разберём почему это может быть очень не",
-					ImgPath: "/public/images/01.png",
-				},
-			}).Render(ctx, templ_7745c5c3_Buffer)
-			if templ_7745c5c3_Err != nil {
-				return templ_7745c5c3_Err
-			}
-			return nil
-		})
-		templ_7745c5c3_Err = layout.TopTagsLayout().Render(templ.WithChildren(ctx, templ_7745c5c3_Var4), templ_7745c5c3_Buffer)
+		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 2, "<div class=\"searching_card_list\">")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 4, "<div class=\"main__news\">")
+		templ_7745c5c3_Err = widgets.SearchingList(catigories, news, pagesCount, page).Render(ctx, templ_7745c5c3_Buffer)
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		templ_7745c5c3_Err = widgets.NewsList(news, pagesCount, page).Render(ctx, templ_7745c5c3_Buffer)
-		if templ_7745c5c3_Err != nil {
-			return templ_7745c5c3_Err
-		}
-		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 5, "</div></main><footer style=\"margin-top: auto; padding-bottom: 102px;\">")
+		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 3, "</div></main><footer style=\"margin-top: auto; padding-bottom: 102px;\">")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
@@ -171,7 +110,7 @@ func Main(news []news.News, pagesCount, page int, tags []TagData) templ.Componen
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 6, "</footer>")
+		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 4, "</footer>")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}

@@ -12,54 +12,58 @@ templ TagPanel() {
 					{ children... }
 				</div>
 			</div>
-			@components.ArrowRight()
+			@components.ArrowRight(components.ArrowProps{Active: true, Page: 1, IsNext: true})
 		</div>
 	</div>
 }
 
 templ TagPanelStyle() {
 	<style>
-        .tag-panel-container {
-            padding: 20px 0 20px 0;  /* Верх 45px, низ 60px */
-            width: 100%;
-            max-width: 1512px;
-            margin: 0 auto;
-        }
+    .tag-panel-container {
+        padding: 20px 0 20px 0;
+        /* Верх 45px, низ 60px */
+        width: 100%;
+        max-width: 1512px;
+        margin: 0 auto;
+    }
 
-        .tag-panel {
-            --panel-padding: 20px;
-            width: 100%;
-            height: 68px;
-            background: var(--color-tag);
-            border-radius: 12px;
-            display: flex;
-            align-items: center;
-            position: relative;
-            padding: 0 var(--panel-padding);
-            box-sizing: border-box;
-        }
+    .tag-panel {
+        --panel-padding: 20px;
+        width: 100%;
+        height: 68px;
+        background: var(--color-tag);
+        border-radius: 12px;
+        display: flex;
+        align-items: center;
+        position: relative;
+        padding: 0 var(--panel-padding);
+        box-sizing: border-box;
+    }
 
-        .tags-wrapper {
-            flex: 1;
-            overflow: hidden;
-            position: relative;
-            height: 100%;
-            display: flex;
-            align-items: center;
-        }
+    .tags-wrapper {
+        flex: 1;
+        overflow: hidden;
+        position: relative;
+        height: 100%;
+        display: flex;
+        align-items: center;
+    }
 
-        .tags-scroller {
-            display: flex;
-            gap: 24px;
-            height: 100%;
-            align-items: center;
-            overflow-x: auto;
-            scrollbar-width: none; /* Firefox */
-            width: calc(100% - 44px); /* 24px arrow + 20px padding */
-        }
+    .tags-scroller {
+        display: flex;
+        gap: 24px;
+        height: 100%;
+        align-items: center;
+        overflow-x: auto;
+        scrollbar-width: none;
+        /* Firefox */
+        width: calc(100% - 44px);
+        /* 24px arrow + 20px padding */
+    }
 
-        .tags-scroller::-webkit-scrollbar {
-            display: none; /* Chrome/Safari */
-        }
-    </style>
+    .tags-scroller::-webkit-scrollbar {
+        display: none;
+        /* Chrome/Safari */
+    }
+</style>
 }

@@ -17,10 +17,10 @@ templ Gallery(tagsInfo []components.TagInfo) {
 			}
 		</div>
 		<div class="swiper-button-next">
-			@components.ArrowRight()
+			@components.ArrowRight(components.ArrowProps{Active: true, Page: 1, IsNext: true})
 		</div>
 		<div class="swiper-button-prev">
-			@components.ArrowLeft()
+			@components.ArrowLeft(components.ArrowProps{Active: true, Page: 1, IsNext: true})
 		</div>
 		<div class="swiper-pagination"></div>
 	</div>

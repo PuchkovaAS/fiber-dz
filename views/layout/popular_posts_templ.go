@@ -10,7 +10,12 @@ import templruntime "github.com/a-h/templ/runtime"
 
 import "fiber-dz/views/components"
 
-func PopularPostsLayout() templ.Component {
+type PopularPostsProps struct {
+	Page      int
+	PageCount int
+}
+
+func PopularPostsLayout(props PopularPostsProps) templ.Component {
 	return templruntime.GeneratedTemplate(func(templ_7745c5c3_Input templruntime.GeneratedComponentInput) (templ_7745c5c3_Err error) {
 		templ_7745c5c3_W, ctx := templ_7745c5c3_Input.Writer, templ_7745c5c3_Input.Context
 		if templ_7745c5c3_CtxErr := ctx.Err(); templ_7745c5c3_CtxErr != nil {
@@ -47,11 +52,12 @@ func PopularPostsLayout() templ.Component {
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		templ_7745c5c3_Err = components.ArrowLeft().Render(ctx, templ_7745c5c3_Buffer)
+		templ_7745c5c3_Err = components.ArrowLeft(components.ArrowProps{Active: props.Page > 1, Page: props.Page, IsNext: false}).Render(ctx, templ_7745c5c3_Buffer)
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		templ_7745c5c3_Err = components.ArrowRight().Render(ctx, templ_7745c5c3_Buffer)
+		templ_7745c5c3_Err = components.ArrowRight(components.ArrowProps{
+			Active: props.Page < props.PageCount, Page: props.Page, IsNext: true}).Render(ctx, templ_7745c5c3_Buffer)
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
@@ -63,15 +69,15 @@ func PopularPostsLayout() templ.Component {
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 4, "</div><div class=\"popular-posts-button-container\"><div class=\"popular-posts-button\"><span class=\"popular-posts-button-label\">Все новости</span>")
+		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 4, "</div><div class=\"popular-posts-button-container\">")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		templ_7745c5c3_Err = components.ArrowRight().Render(ctx, templ_7745c5c3_Buffer)
+		templ_7745c5c3_Err = components.ButtonHrefRight(components.ButtonHrefProps{Label: "Все новости", Href: "/searching"}).Render(ctx, templ_7745c5c3_Buffer)
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 5, "</div></div></div></div>")
+		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 5, "</div></div></div>")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
@@ -100,7 +106,7 @@ func PopularPostsLayoutStyle() templ.Component {
 			templ_7745c5c3_Var2 = templ.NopComponent
 		}
 		ctx = templ.ClearChildren(ctx)
-		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 6, "<style>\n    :root {\n        /* Text style variables */\n        --font-family: \"Roboto\", sans-serif;\n        --h3-font-size: 25px;\n        --h3-font-weight: 400;\n        --h4-font-size: 20px;\n        --h4-font-weight: 500;\n        --h5-font-size: 16px;\n        --h5-font-weight: 500;\n        --text-sm-font-size: 14px;\n        --text-sm-font-weight: 500;\n        --text-sm-line-height: 20px;\n    }\n\n    .popular-posts-panel {\n        width: 100%;\n        padding: 20px 0;\n        overflow-x: hidden;\n        background: var(--color-white);\n        color: var(--color-black-75);\n        font-family: var(--font-family);\n    }\n\n    .popular-posts-wrapper {\n        width: 100%;\n        max-width: 1512px;\n        margin: 0 auto;\n        padding: 0 20px;\n    }\n\n    .popular-posts-header-section {\n        display: flex;\n        width: 100%;\n        align-items: center;\n        justify-content: space-between;\n        position: relative;\n        margin-bottom: 20px;\n    }\n\n    .popular-posts-arrow-slider {\n        display: flex;\n        gap: 8px;\n    }\n\n    .popular-posts-arrow-slider .arrow-left {\n        opacity: 0.3;\n    }\n\n    .popular-posts-scroller {\n        display: flex;\n        gap: 15px;\n        overflow-x: auto;\n        padding-bottom: 20px;\n        scrollbar-width: none;\n    }\n\n    .popular-posts-scroller::-webkit-scrollbar {\n        display: none;\n    }\n\n    .popular-posts-button-container {\n        display: flex;\n        justify-content: center;\n        margin-top: 20px;\n    }\n\n    .popular-posts-button {\n        display: inline-flex;\n        align-items: center;\n        justify-content: center;\n        gap: 8px;\n        width: 146px;\n        height: 40px;\n        background-color: var(--color-black-5);\n        border-radius: 12px;\n        cursor: pointer;\n        transition: background-color 0.2s;\n    }\n\n    .popular-posts-button:hover {\n        background-color: var(--color-text-hover);\n    }\n\n    .popular-posts-button-label {\n        font-family: var(--font-family);\n        font-weight: var(--text-sm-font-weight);\n        color: var(--color-black-75);\n        font-size: var(--text-sm-font-size);\n        letter-spacing: 0;\n        line-height: var(--text-sm-line-height);\n    }\n\n    /* Чтобы карточки не сжимались */\n    .popular-posts-scroller > * {\n        flex: 0 0 auto;\n    }\n    </style>")
+		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 6, "<style>\n        :root {\n            /* Text style variables */\n            --font-family: \"Roboto\", sans-serif;\n            --h3-font-size: 25px;\n            --h3-font-weight: 400;\n            --h4-font-size: 20px;\n            --h4-font-weight: 500;\n            --h5-font-size: 16px;\n            --h5-font-weight: 500;\n            --text-sm-font-size: 14px;\n            --text-sm-font-weight: 500;\n            --text-sm-line-height: 20px;\n        }\n\n        .popular-posts-panel {\n            width: 100%;\n            padding: 20px 0;\n            overflow-x: hidden;\n            background: var(--color-white);\n            color: var(--color-black-75);\n            font-family: var(--font-family);\n        }\n\n        .popular-posts-wrapper {\n            width: 100%;\n            max-width: 1512px;\n            margin: 0 auto;\n            padding: 0 20px;\n        }\n\n        .popular-posts-header-section {\n            display: flex;\n            width: 100%;\n            align-items: center;\n            justify-content: space-between;\n            position: relative;\n            margin-bottom: 20px;\n        }\n\n        .popular-posts-arrow-slider {\n            display: flex;\n            gap: 8px;\n        }\n\n        .popular-posts-arrow-slider .arrow-left {\n            opacity: 0.3;\n        }\n\n        .popular-posts-scroller {\n            display: flex;\n            gap: 15px;\n            overflow-x: auto;\n            padding-bottom: 20px;\n            scrollbar-width: none;\n        }\n\n        .popular-posts-scroller::-webkit-scrollbar {\n            display: none;\n        }\n\n        .popular-posts-button-container {\n            display: flex;\n            justify-content: center;\n            margin-top: 20px;\n        }\n\n        /* Чтобы карточки не сжимались */\n        .popular-posts-scroller>* {\n            flex: 0 0 auto;\n        }\n    </style>")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}

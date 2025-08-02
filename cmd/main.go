@@ -3,6 +3,7 @@ package main
 import (
 	"fiber-dz/config"
 	"fiber-dz/internal/auth"
+	"fiber-dz/internal/news"
 	"fiber-dz/internal/pages"
 	"fiber-dz/internal/users"
 	"fiber-dz/pkg/database"
@@ -52,12 +53,16 @@ func main() {
 		dbpool,
 		logger,
 	)
+	newsRepository := news.NewNewsRepository(
+		dbpool,
+		logger,
+	)
 
 	// services
 	authService := auth.NewAuthService(userRepository)
 
 	// handlers
-	pages.NewHandler(app, logger)
+	pages.NewHandler(app, logger, newsRepository)
 	auth.NewHandler(app, logger, *authService, store)
 	app.Listen(":3000")
 }

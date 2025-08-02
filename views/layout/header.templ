@@ -3,57 +3,57 @@ package layout
 import "fiber-dz/views/components"
 
 templ Header() {
-	@HeaderStyle()
-	<header class="header">
-		<div class="header-container">
-			<!-- Добавляем новый контейнер -->
-			<div class="header-left">
-				<!-- Текстовый логотип вместо картинки -->
-				<a href="/" class="logo">Новости</a>
-				<!-- Навигация с выпадающим меню -->
-				<nav class="nav">
-					<div class="nav-item categories">
-						<span>Категории</span>
-						<span class="dropdown-icon">⌄</span>
-						<div class="dropdown-menu">
-							{ children... }
-						</div>
-					</div>
-					<a href="/contacts" class="nav-item">Контакты</a>
-				</nav>
-			</div>
-			<div class="header-right">
-				@components.SearchPanel()
-				{{ email := ctx.Value("email").(string) }}
-				if email == "" {
-					@components.Auth()
-				} else {
-					<div class="profile-dropdown">
-						<div class="menu__right-avatar"></div>
-						<span class="menu__right-email">{ email }</span>
-						<div class="dropdown-menu">
-							<a class="menu_right-link" hx-get="/api/profile" hx-trigger="click">
-								Профиль
-							</a>
-							<a class="menu_right-link" hx-get="/api/logout" hx-trigger="click">
-								Выйти
-							</a>
-						</div>
-					</div>
-				}
-			</div>
-		</div>
-	</header>
+@HeaderStyle()
+<header class="header">
+    <div class="header-container">
+        <!-- Добавляем новый контейнер -->
+        <div class="header-left">
+            <!-- Текстовый логотип вместо картинки -->
+            <a href="/" class="logo">Новости</a>
+            <!-- Навигация с выпадающим меню -->
+            <nav class="nav">
+                <div class="nav-item categories">
+                    <span>Категории</span>
+                    <span class="dropdown-icon">⌄</span>
+                    <div class="dropdown-menu">
+                        { children... }
+                    </div>
+                </div>
+                <a href="/contacts" class="nav-item">Контакты</a>
+            </nav>
+        </div>
+        <div class="header-right">
+            @components.SearchPanel()
+            {{ email := ctx.Value("email").(string) }}
+            if email == "" {
+            @components.Auth()
+            } else {
+            <div class="profile-dropdown">
+                <div class="menu__right-avatar"></div>
+                <span class="menu__right-email">{ email }</span>
+                <div class="dropdown-menu">
+                    <a class="menu_right-link" hx-get="/api/profile" hx-trigger="click">
+                        Профиль
+                    </a>
+                    <a class="menu_right-link" hx-get="/api/logout" hx-trigger="click">
+                        Выйти
+                    </a>
+                </div>
+            </div>
+            }
+        </div>
+    </div>
+</header>
 }
 
 templ HeaderStyle() {
-	<style>
-
+<style>
     /* Основные стили хедера */
     .header {
         width: 100%;
         background-color: var(--color-white);
-        padding-top: 25px;  /* Добавляем отступ сверху */
+        padding-top: 25px;
+        /* Добавляем отступ сверху */
     }
 
     /* Новый контейнер для содержимого хедера */
@@ -65,7 +65,7 @@ templ HeaderStyle() {
         align-items: center;
         padding: 15px 5%;
     }
-    
+
     /* Логотип */
     .logo {
         color: var(--color-primary);
@@ -76,7 +76,7 @@ templ HeaderStyle() {
         text-decoration: none;
         line-height: 1.2;
     }
-    
+
     /* Левая часть хедера */
     .header-left {
         display: flex;
@@ -87,13 +87,13 @@ templ HeaderStyle() {
         letter-spacing: var(--nav-item-letter-spacing);
         transition: color 0.2s ease;
     }
-    
+
     /* Навигация */
     .nav {
         display: flex;
         gap: 25px;
     }
-    
+
     .nav-item {
         position: relative;
         color: var(--color-black);
@@ -104,16 +104,16 @@ templ HeaderStyle() {
         align-items: center;
         gap: 5px;
     }
-    
+
     /* Выпадающее меню категорий */
     .categories {
         cursor: pointer;
     }
-    
+
     .categories:hover .dropdown-menu {
         display: block;
     }
-    
+
     .dropdown-menu {
         display: none;
         position: absolute;
@@ -126,22 +126,23 @@ templ HeaderStyle() {
         padding: 10px 0;
         z-index: 100;
     }
-    
+
     /* Правая часть хедера */
     .header-right {
         display: flex;
         align-items: center;
         gap: 25px;
     }
-    
+
     /* Анимации */
     .dropdown-icon {
         transition: transform 0.3s ease;
     }
-    
+
     .categories:hover .dropdown-icon {
         transform: rotate(180deg);
     }
+
     .menu_right-link {
         text-decoration: none;
         color: var(--color-primary);
@@ -152,12 +153,14 @@ templ HeaderStyle() {
     .menu_right-link:hover {
         color: #9f9f9f;
     }
+
     .menu__right-email {
 
         color: var(--color-black);
         font-size: var(--h5-font-size);
         font-weight: var(--h5-font-weight);
     }
+
     .menu__right-avatar {
         position: relative;
         width: 48px;
@@ -167,27 +170,32 @@ templ HeaderStyle() {
         background-size: cover;
         background-position: 50% 50%;
     }
-/* Выпадающее меню профиля */
-.header-right {
-    position: relative; /* Важно для позиционирования меню */
-}
 
-.header-right:hover .dropdown-menu {
-    display: block;
-    right: 0; /* Выравниваем по правому краю */
-    left: auto; /* Отменяем left: 0 из общего стиля */
-}
+    /* Выпадающее меню профиля */
+    .header-right {
+        position: relative;
+        /* Важно для позиционирования меню */
+    }
 
-.menu__right-avatar:hover + .dropdown-menu,
-.dropdown-menu:hover {
-    display: block;
-}
-.profile-dropdown {
-    position: relative;
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    cursor: pointer;
-}
-    </style>
+    .header-right:hover .dropdown-menu {
+        display: block;
+        right: 0;
+        /* Выравниваем по правому краю */
+        left: auto;
+        /* Отменяем left: 0 из общего стиля */
+    }
+
+    .menu__right-avatar:hover+.dropdown-menu,
+    .dropdown-menu:hover {
+        display: block;
+    }
+
+    .profile-dropdown {
+        position: relative;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        cursor: pointer;
+    }
+</style>
 }
