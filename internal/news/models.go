@@ -7,7 +7,7 @@ type News struct {
 	Title      string    `db:"title"`
 	Preview    string    `db:"preview"`
 	Text       string    `db:"text"`
-	UserID     int       `db:"user_id"`
+	UserName   string    `db:"user_name"`
 	CreatedAt  time.Time `db:"created_at"`
 	Categories []string  `db:"categories"`
 	Alias      string    `db:"alias"`

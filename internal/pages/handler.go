@@ -69,7 +69,7 @@ func GetTags() []views.TagData {
 		{
 			Name:    "Прочее",
 			PathImg: "/public/images/abstract/07.png",
-			Url:     "/searching/Прочее",
+			Url:     "/searching?category=прочее",
 		},
 	}
 }
@@ -139,9 +139,16 @@ func (h *PagesHandler) searching(c *fiber.Ctx) error {
 		return c.SendStatus(500)
 	}
 
+	var titlePage string
+	if query.Category != "" {
+		titlePage = query.Category
+	} else {
+		titlePage = query.Keyword
+	}
+
 	tags := GetTags()
 	component := views.Searching(
-		query.Category,
+		titlePage,
 		news,
 		int(math.Ceil(float64(count)/float64(PAGE_ITEMS))),
 		query.Page,

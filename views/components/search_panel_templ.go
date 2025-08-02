@@ -33,7 +33,7 @@ func SearchPanel() templ.Component {
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 1, "<div class=\"search\"><input type=\"text\" placeholder=\"Найти новость...\" class=\"search-input\"> <button class=\"search-button\"><i class=\"fas fa-search\"></i><!-- Иконка лупы из Font Awesome --></button></div>")
+		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 1, "<div class=\"search\"><input type=\"text\" placeholder=\"Найти новость...\" class=\"search-input\" id=\"searchInput\" name=\"keyword\" onkeydown=\"if(event.key === 'Enter') search()\"> <button class=\"search-button\" onclick=\"search()\"><i class=\"fas fa-search\"></i></button></div><script>\n    function search() {\n        const input = document.getElementById('searchInput');\n        const keyword = encodeURIComponent(input.value.trim());\n        if (keyword) {\n            window.location.href = `/searching?keyword=${keyword}`;\n        }\n    }\n</script>")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
@@ -62,7 +62,7 @@ func SearchPanelStyle() templ.Component {
 			templ_7745c5c3_Var2 = templ.NopComponent
 		}
 		ctx = templ.ClearChildren(ctx)
-		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 2, "<style>\n        /* Поиск */\n        .search {\n            display: flex;\n            align-items: center;\n            background: #f5f5f5;\n            border-radius: 20px;\n            padding: 8px 15px;\n            transition: all 0.3s ease;\n        }\n\n        .search:focus-within {\n            box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.25);\n        }\n\n        .search-input {\n            border: none;\n            background: transparent;\n            padding: 5px 10px;\n            width: 200px;\n            outline: none;\n            font-family: \"Roboto\", sans-serif;\n            font-size: 14px;\n        }\n\n        .search-button {\n            background: none;\n            border: none;\n            cursor: pointer;\n            padding: 5px;\n            color: #555;\n            transition: color 0.2s ease;\n        }\n\n        .search-button:hover {\n            color: #000;\n        }\n\n        .fa-search {\n            font-size: 16px;\n        }\n    </style>")
+		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 2, "<style>\n    /* Поиск */\n    .search {\n        display: flex;\n        align-items: center;\n        background: #f5f5f5;\n        border-radius: 20px;\n        padding: 8px 15px;\n        transition: all 0.3s ease;\n    }\n\n    .search:focus-within {\n        box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.25);\n    }\n\n    .search-input {\n        border: none;\n        background: transparent;\n        padding: 5px 10px;\n        width: 200px;\n        outline: none;\n        font-family: \"Roboto\", sans-serif;\n        font-size: 14px;\n    }\n\n    .search-button {\n        background: none;\n        border: none;\n        cursor: pointer;\n        padding: 5px;\n        color: #555;\n        transition: color 0.2s ease;\n    }\n\n    .search-button:hover {\n        color: #000;\n    }\n\n    .fa-search {\n        font-size: 16px;\n    }\n</style>")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}

@@ -13,7 +13,11 @@ templ SearchingList(keyword string, newsList []news.News, pagesCount, page int) 
 	<div class="searching-list-wrapper">
 		<div class="searching-list-container">
 			<div class="searching-list-container__title">
-				@components.TitleRed(strings.Title(keyword))
+				if keyword != "" {
+					@components.TitleRed(strings.Title(keyword))
+				} else {
+					@components.TitleRed("Все новости")
+				}
 			</div>
 			<div class="searching-list-grid">
 				for _, news := range newsList {
@@ -21,7 +25,7 @@ templ SearchingList(keyword string, newsList []news.News, pagesCount, page int) 
 					@components.Card(&components.CardInfo{
 						ImagePath:    news.Preview,
 						Title:        news.Title,
-						AutorName:    "Михаил Аршинов",
+						AutorName:    news.UserName,
 						AutorImgPath: "/public/images/avatar/12.png",
 						Text:         news.Text,
 						Date:         date,

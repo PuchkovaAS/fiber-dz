@@ -15,7 +15,7 @@ templ NewsList(newsList []news.News, pagesCount, page int) {
 			@components.Card(&components.CardInfo{
 				ImagePath:    news.Preview,
 				Title:        news.Title,
-				AutorName:    "Михаил Аршинов",
+				AutorName:    news.UserName,
 				AutorImgPath: "/public/images/avatar/12.png",
 				Text:         news.Text,
 				Date:         date,

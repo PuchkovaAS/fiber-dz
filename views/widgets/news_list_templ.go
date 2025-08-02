@@ -57,7 +57,7 @@ func NewsList(newsList []news.News, pagesCount, page int) templ.Component {
 				templ_7745c5c3_Err = components.Card(&components.CardInfo{
 					ImagePath:    news.Preview,
 					Title:        news.Title,
-					AutorName:    "Михаил Аршинов",
+					AutorName:    news.UserName,
 					AutorImgPath: "/public/images/avatar/12.png",
 					Text:         news.Text,
 					Date:         date,

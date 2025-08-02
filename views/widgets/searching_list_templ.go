@@ -45,9 +45,16 @@ func SearchingList(keyword string, newsList []news.News, pagesCount, page int) t
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		templ_7745c5c3_Err = components.TitleRed(strings.Title(keyword)).Render(ctx, templ_7745c5c3_Buffer)
-		if templ_7745c5c3_Err != nil {
-			return templ_7745c5c3_Err
+		if keyword != "" {
+			templ_7745c5c3_Err = components.TitleRed(strings.Title(keyword)).Render(ctx, templ_7745c5c3_Buffer)
+			if templ_7745c5c3_Err != nil {
+				return templ_7745c5c3_Err
+			}
+		} else {
+			templ_7745c5c3_Err = components.TitleRed("Все новости").Render(ctx, templ_7745c5c3_Buffer)
+			if templ_7745c5c3_Err != nil {
+				return templ_7745c5c3_Err
+			}
 		}
 		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 2, "</div><div class=\"searching-list-grid\">")
 		if templ_7745c5c3_Err != nil {
@@ -58,7 +65,7 @@ func SearchingList(keyword string, newsList []news.News, pagesCount, page int) t
 			templ_7745c5c3_Err = components.Card(&components.CardInfo{
 				ImagePath:    news.Preview,
 				Title:        news.Title,
-				AutorName:    "Михаил Аршинов",
+				AutorName:    news.UserName,
 				AutorImgPath: "/public/images/avatar/12.png",
 				Text:         news.Text,
 				Date:         date,
@@ -85,7 +92,7 @@ func SearchingList(keyword string, newsList []news.News, pagesCount, page int) t
 		var templ_7745c5c3_Var2 string
 		templ_7745c5c3_Var2, templ_7745c5c3_Err = templ.JoinStringErrs(page)
 		if templ_7745c5c3_Err != nil {
-			return templ.Error{Err: templ_7745c5c3_Err, FileName: `views/widgets/searching_list.templ`, Line: 38, Col: 51}
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `views/widgets/searching_list.templ`, Line: 42, Col: 51}
 		}
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var2))
 		if templ_7745c5c3_Err != nil {
@@ -98,7 +105,7 @@ func SearchingList(keyword string, newsList []news.News, pagesCount, page int) t
 		var templ_7745c5c3_Var3 string
 		templ_7745c5c3_Var3, templ_7745c5c3_Err = templ.JoinStringErrs(pagesCount)
 		if templ_7745c5c3_Err != nil {
-			return templ.Error{Err: templ_7745c5c3_Err, FileName: `views/widgets/searching_list.templ`, Line: 38, Col: 71}
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `views/widgets/searching_list.templ`, Line: 42, Col: 71}
 		}
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var3))
 		if templ_7745c5c3_Err != nil {
