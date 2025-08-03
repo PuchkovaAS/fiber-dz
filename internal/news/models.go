@@ -2,6 +2,12 @@ package news
 
 import "time"
 
+type newsCreateForm struct {
+	Title   string
+	Preview string
+	Text    string
+}
+
 type News struct {
 	ID         int       `db:"id"`
 	Title      string    `db:"title"`

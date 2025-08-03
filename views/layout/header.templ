@@ -3,51 +3,54 @@ package layout
 import "fiber-dz/views/components"
 
 templ Header() {
-@HeaderStyle()
-<header class="header">
-    <div class="header-container">
-        <!-- Добавляем новый контейнер -->
-        <div class="header-left">
-            <!-- Текстовый логотип вместо картинки -->
-            <a href="/" class="logo">Новости</a>
-            <!-- Навигация с выпадающим меню -->
-            <nav class="nav">
-                <div class="nav-item categories">
-                    <span>Категории</span>
-                    <span class="dropdown-icon">⌄</span>
-                    <div class="dropdown-menu">
-                        { children... }
-                    </div>
-                </div>
-                <a href="/contacts" class="nav-item">Контакты</a>
-            </nav>
-        </div>
-        <div class="header-right">
-            @components.SearchPanel()
-            {{ email := ctx.Value("email").(string) }}
-            if email == "" {
-            @components.Auth()
-            } else {
-            <div class="profile-dropdown">
-                <div class="menu__right-avatar"></div>
-                <span class="menu__right-email">{ email }</span>
-                <div class="dropdown-menu">
-                    <a class="menu_right-link" hx-get="/api/profile" hx-trigger="click">
-                        Профиль
-                    </a>
-                    <a class="menu_right-link" hx-get="/api/logout" hx-trigger="click">
-                        Выйти
-                    </a>
-                </div>
-            </div>
-            }
-        </div>
-    </div>
-</header>
+	@HeaderStyle()
+	<header class="header">
+		<div class="header-container">
+			<!-- Добавляем новый контейнер -->
+			<div class="header-left">
+				<!-- Текстовый логотип вместо картинки -->
+				<a href="/" class="logo">Новости</a>
+				<!-- Навигация с выпадающим меню -->
+				<nav class="nav">
+					<div class="nav-item categories">
+						<span>Категории</span>
+						<span class="dropdown-icon">⌄</span>
+						<div class="dropdown-menu">
+							{ children... }
+						</div>
+					</div>
+					<a href="/contacts" class="nav-item">Контакты</a>
+				</nav>
+			</div>
+			<div class="header-right">
+				@components.SearchPanel()
+				{{ email := ctx.Value("email").(string) }}
+				if email == "" {
+					@components.Auth()
+				} else {
+					<div class="profile-dropdown">
+						<div class="menu__right-avatar"></div>
+						<span class="menu__right-email">{ email }</span>
+						<div class="dropdown-menu">
+							<a class="menu_right-link" hx-get="/api/profile" hx-trigger="click">
+								Профиль
+							</a>
+							<a class="menu_right-link" hx-get="/api/logout" hx-trigger="click">
+								Выйти
+							</a>
+							<a class="menu_right-link" href="/create">
+								Создать новость
+							</a>
+						</div>
+					</div>
+				}
+			</div>
+		</div>
+	</header>
 }
 
 templ HeaderStyle() {
-<style>
+	<style>
     /* Основные стили хедера */
     .header {
         width: 100%;

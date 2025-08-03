@@ -8,6 +8,7 @@ import (
 	"net/http"
 
 	"github.com/gofiber/fiber/v2"
+	"github.com/gofiber/fiber/v2/middleware/session"
 
 	templeadapter "fiber-dz/pkg/templ_adapter"
 )
@@ -16,23 +17,27 @@ type PagesHandler struct {
 	router         fiber.Router
 	customLogger   *slog.Logger
 	newsRepository *news.NewsRepository
+	store          *session.Store
 }
 
 func NewHandler(
 	router fiber.Router,
 	customLogger *slog.Logger,
 	newsRepository *news.NewsRepository,
+	store *session.Store,
 ) {
 	h := &PagesHandler{
 		router:         router,
 		customLogger:   customLogger,
 		newsRepository: newsRepository,
+		store:          store,
 	}
 	router.Get("/", h.home)
 	router.Get("/register", h.register)
 	router.Get("/login", h.login)
 	router.Get("/searching", h.searching)
 	router.Get("/article/:alias", h.article)
+	router.Get("/create", h.createNews)
 }
 
 func GetTags() []views.TagData {
@@ -73,6 +78,23 @@ func GetTags() []views.TagData {
 			Url:     "/searching?category=прочее",
 		},
 	}
+}
+
+func (h *PagesHandler) createNews(c *fiber.Ctx) error {
+	email, ok := c.Locals("email").(string)
+	if !ok || email == "" {
+		// Для HTMX-запросов
+		if c.Get("HX-Request") == "true" {
+			c.Response().Header.Add("HX-Redirect", "/login")
+			return c.SendStatus(fiber.StatusOK)
+		}
+		// Для обычных запросов
+		return c.Redirect("/login")
+	}
+	tags := GetTags()
+	component := views.AddArticle(tags)
+
+	return templeadapter.Render(c, component, http.StatusOK)
 }
 
 func (h *PagesHandler) article(c *fiber.Ctx) error {
