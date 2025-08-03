@@ -32,6 +32,7 @@ func NewHandler(
 	router.Get("/register", h.register)
 	router.Get("/login", h.login)
 	router.Get("/searching", h.searching)
+	router.Get("/article/:alias", h.article)
 }
 
 func GetTags() []views.TagData {
@@ -72,6 +73,20 @@ func GetTags() []views.TagData {
 			Url:     "/searching?category=прочее",
 		},
 	}
+}
+
+func (h *PagesHandler) article(c *fiber.Ctx) error {
+	tags := GetTags()
+	alias := c.Params("alias")
+
+	news, err := h.newsRepository.GetArticleByAlias(alias)
+	if err != nil {
+		h.customLogger.Error(err.Error())
+		return c.SendStatus(500)
+	}
+	component := views.Article(news, tags)
+
+	return templeadapter.Render(c, component, http.StatusOK)
 }
 
 func (h *PagesHandler) login(c *fiber.Ctx) error {

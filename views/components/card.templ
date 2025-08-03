@@ -7,11 +7,12 @@ type CardInfo struct {
 	AutorName    string
 	AutorImgPath string
 	Date         string
+	Alias        string
 }
 
 templ Card(cardInfo *CardInfo) {
 	@CardStyle()
-	<div class="card-container">
+	<div class="card-container" data-alias={ cardInfo.Alias } style="cursor: pointer;">
 		<div class="card-image" style={ "background-image: url(" + cardInfo.ImagePath + ")" }></div>
 		<div class="card-title-wrapper">
 			<div class="card-title-text">{ cardInfo.Title }</div>
@@ -28,10 +29,24 @@ templ Card(cardInfo *CardInfo) {
 				</div>
 			</div>
 			<div class="card-action-icon">
-				<div class="icon-container"><div class="card-icon"></div></div>
+				<div class="icon-container">
+					<div class="card-icon"></div>
+				</div>
 			</div>
 		</div>
 	</div>
+	@CardScript()
+}
+
+templ CardScript() {
+	<script>
+    document.querySelectorAll('.card-container').forEach(card => {
+        card.addEventListener('click', function () {
+            const alias = this.getAttribute('data-alias');
+            window.location.href = '/article/' + encodeURIComponent(alias);
+        });
+    });
+</script>
 }
 
 templ CardStyle() {
@@ -55,17 +70,22 @@ templ CardStyle() {
         border-radius: 12px;
         overflow: hidden;
         box-shadow: var(--card-shadow);
-        transition: box-shadow 0.2s ease;
+        transition: all 0.2s ease;
+    }
+
+    .card-container:hover {
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        transform: translateY(-2px);
     }
 
     .card-image {
-        width: 340px;  /* Новый размер */
-        height: 190px; /* Новый размер */
+        width: 340px;
+        height: 190px;
         border-radius: 8px;
         background-size: cover;
         background-position: center;
         margin-bottom: 12px;
-        align-self: center; /* Центрируем картинку */
+        align-self: center;
     }
 
     .card-title-wrapper {
@@ -168,5 +188,5 @@ templ CardStyle() {
         color: var(--color-black-50);
         font-size: 20px;
     }
-    </style>
+</style>
 }

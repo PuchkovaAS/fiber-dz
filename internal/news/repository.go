@@ -80,6 +80,38 @@ func (r *NewsRepository) CountAll() int {
 	return count
 }
 
+func (r *NewsRepository) GetArticleByAlias(alias string) (News, error) {
+	query := `
+        SELECT 
+            n.id,
+            n.title,
+            n.preview,
+            n.text,
+            u.name AS user_name,
+            n.created_at,
+            n.categories,
+            n.alias
+        FROM news n
+        JOIN users u ON n.user_id = u.id
+        WHERE n.alias = @alias
+     `
+	args := pgx.NamedArgs{
+		"alias": alias,
+	}
+
+	row, err := r.Dbpool.Query(context.Background(), query, args)
+	if err != nil {
+		return News{}, err
+	}
+
+	news, err := pgx.CollectOneRow(row, pgx.RowToStructByName[News])
+	if err != nil {
+		return News{}, err
+	}
+
+	return news, nil
+}
+
 func (r *NewsRepository) GetAll(limit, offset int) ([]News, error) {
 	query := `
         SELECT 
