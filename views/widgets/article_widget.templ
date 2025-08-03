@@ -3,6 +3,7 @@ package widgets
 import (
 	"fiber-dz/internal/news"
 	"fiber-dz/views/components"
+	"strings"
 )
 
 templ ArticleWidget(news news.News) {
@@ -12,7 +13,8 @@ templ ArticleWidget(news news.News) {
 			<div class="article-container__title">
 				@components.Title(news.Title)
 			</div>
-			<div class="article-container__image" style={ "background-image: url(" + news.Preview + ")" }></div>
+			{{ img := strings.TrimPrefix(news.Preview, ".") }}
+			<div class="article-container__image" style={ "background-image: url(" + img + ")" }></div>
 		</div>
 		<div class="article-container__text">
 			{ news.Text }
@@ -48,8 +50,10 @@ templ ArticleWidgetStyle() {
         background-size: cover;
         background-position: center;
         background-repeat: no-repeat;
+
         border-radius: 8px;
-        margin: 0 auto;
+        margin-bottom: 12px;
+        align-self: center;
     }
 
     .article-container__text {

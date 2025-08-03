@@ -11,6 +11,7 @@ import templruntime "github.com/a-h/templ/runtime"
 import (
 	"fiber-dz/internal/news"
 	"fiber-dz/views/components"
+	"strings"
 )
 
 func ArticleWidget(news news.News) templ.Component {
@@ -46,33 +47,38 @@ func ArticleWidget(news news.News) templ.Component {
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 2, "</div><div class=\"article-container__image\" style=\"")
+		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 2, "</div>")
+		if templ_7745c5c3_Err != nil {
+			return templ_7745c5c3_Err
+		}
+		img := strings.TrimPrefix(news.Preview, ".")
+		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 3, "<div class=\"article-container__image\" style=\"")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
 		var templ_7745c5c3_Var2 string
-		templ_7745c5c3_Var2, templ_7745c5c3_Err = templruntime.SanitizeStyleAttributeValues("background-image: url(" + news.Preview + ")")
+		templ_7745c5c3_Var2, templ_7745c5c3_Err = templruntime.SanitizeStyleAttributeValues("background-image: url(" + img + ")")
 		if templ_7745c5c3_Err != nil {
-			return templ.Error{Err: templ_7745c5c3_Err, FileName: `views/widgets/article_widget.templ`, Line: 15, Col: 94}
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `views/widgets/article_widget.templ`, Line: 17, Col: 85}
 		}
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var2))
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 3, "\"></div></div><div class=\"article-container__text\">")
+		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 4, "\"></div></div><div class=\"article-container__text\">")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
 		var templ_7745c5c3_Var3 string
 		templ_7745c5c3_Var3, templ_7745c5c3_Err = templ.JoinStringErrs(news.Text)
 		if templ_7745c5c3_Err != nil {
-			return templ.Error{Err: templ_7745c5c3_Err, FileName: `views/widgets/article_widget.templ`, Line: 18, Col: 14}
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `views/widgets/article_widget.templ`, Line: 20, Col: 14}
 		}
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var3))
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 4, "</div></div>")
+		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 5, "</div></div>")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
@@ -101,7 +107,7 @@ func ArticleWidgetStyle() templ.Component {
 			templ_7745c5c3_Var4 = templ.NopComponent
 		}
 		ctx = templ.ClearChildren(ctx)
-		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 5, "<style>\n    .article-container {\n        max-width: 1128px;\n        width: 100%;\n        margin: 0 auto;\n        padding: 20px;\n        box-sizing: border-box;\n        font-family: var(--font-family);\n    }\n\n    .article-container__header {\n        width: 1126px;\n        max-width: 100%;\n        margin-bottom: 24px;\n    }\n\n    .article-container__title {\n        margin-bottom: 20px;\n    }\n\n    .article-container__image {\n        width: 1072px;\n        height: 528px;\n        max-width: 100%;\n        background-size: cover;\n        background-position: center;\n        background-repeat: no-repeat;\n        border-radius: 8px;\n        margin: 0 auto;\n    }\n\n    .article-container__text {\n        max-width: 1072px;\n        width: 100%;\n        margin: 0 auto;\n        line-height: 1.6;\n        font-size: 18px;\n        color: var(--color-black-75);\n    }\n\n    @media (max-width: 1200px) {\n        .article-container__image {\n            height: calc(528px * 0.8);\n        }\n    }\n\n    @media (max-width: 768px) {\n        .article-container__image {\n            height: calc(528px * 0.6);\n        }\n\n        .article-container__text {\n            font-size: 16px;\n        }\n    }\n\n    @media (max-width: 480px) {\n        .article-container__image {\n            height: calc(528px * 0.4);\n        }\n    }\n</style>")
+		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 6, "<style>\n    .article-container {\n        max-width: 1128px;\n        width: 100%;\n        margin: 0 auto;\n        padding: 20px;\n        box-sizing: border-box;\n        font-family: var(--font-family);\n    }\n\n    .article-container__header {\n        width: 1126px;\n        max-width: 100%;\n        margin-bottom: 24px;\n    }\n\n    .article-container__title {\n        margin-bottom: 20px;\n    }\n\n    .article-container__image {\n        width: 1072px;\n        height: 528px;\n        max-width: 100%;\n        background-size: cover;\n        background-position: center;\n        background-repeat: no-repeat;\n\n        border-radius: 8px;\n        margin-bottom: 12px;\n        align-self: center;\n    }\n\n    .article-container__text {\n        max-width: 1072px;\n        width: 100%;\n        margin: 0 auto;\n        line-height: 1.6;\n        font-size: 18px;\n        color: var(--color-black-75);\n    }\n\n    @media (max-width: 1200px) {\n        .article-container__image {\n            height: calc(528px * 0.8);\n        }\n    }\n\n    @media (max-width: 768px) {\n        .article-container__image {\n            height: calc(528px * 0.6);\n        }\n\n        .article-container__text {\n            font-size: 16px;\n        }\n    }\n\n    @media (max-width: 480px) {\n        .article-container__image {\n            height: calc(528px * 0.4);\n        }\n    }\n</style>")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
