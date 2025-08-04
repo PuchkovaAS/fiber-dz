@@ -10,19 +10,26 @@ templ AddNewsForm() {
 			@components.TitleRed("Создать новость")
 		</div>
 		<form
-			hx-ext="response-targets"
+			hx-ext="response-targets, file-upload"
 			class="add_news-form"
-			hx-post="api/register"
+			hx-post="/api/news/create"
 			hx-trigger="submit"
 			hx-target="#add_news-result"
 			hx-swap="innerHTML swap:0.5s"
+			hx-encoding="multipart/form-data"
 			hx-on::after-request="if(event.detail.successful) this.reset()"
 		>
 			<div class="add_news-form__inputs">
-				@components.Input(components.InputProps{Placeholder: "Заголовок", Name: "title"})
-				@components.Textarea(components.TextareaProps{
-					Placeholder: "Превью",
-					Name:        "preview",
+				@components.Input(components.InputProps{
+					Placeholder: "Заголовок",
+					Name:        "title",
+				})
+				<!-- Добавлен компонент загрузки изображения -->
+				@components.FileInput(components.FileInputProps{
+					Name:   "preview_image",
+					Accept: "image/png, image/jpeg",
+					Class:  "file-input",
+					Label:  "Превью",
 				})
 				@components.Textarea(components.TextareaProps{
 					Placeholder: "Текст",

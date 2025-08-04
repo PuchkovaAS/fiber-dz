@@ -1,0 +1,58 @@
+package components
+
+type FileInputProps struct {
+	Name   string
+	Accept string
+	Class  string
+	Label  string // Добавляем свойство для подписи
+}
+
+templ FileInput(props FileInputProps) {
+	@FileInputStyle()
+	<div class="file-input-box">
+		<!-- Добавляем подпись как в компоненте Input -->
+		<div class="file-input-title">{ props.Label }</div>
+		<input type="file" name={ props.Name } accept={ props.Accept } class={ "file-input " + props.Class }/>
+	</div>
+}
+
+templ FileInputStyle() {
+	<style>
+    .file-input-box {
+        position: relative;
+        margin-top: 15px;
+        /* Соответствует стилю .input-box */
+        text-align: left;
+        width: 100%;
+    }
+
+    .file-input-title {
+        font-size: var(--h5-font-size);
+        font-weight: var(--h5-font-weight);
+        color: var(--color-dark75);
+        position: absolute;
+        top: -25px;
+        left: 5px;
+        background: white;
+        text-align: left;
+        width: 100%;
+    }
+
+    .file-input {
+        display: block;
+        width: 100%;
+        padding: 12px 8px;
+        /* Как в .input */
+        border-radius: 12px;
+        background: var(--color-gray);
+        border: none;
+        font-family: inherit;
+    }
+
+    /* Стилизация при фокусе */
+    .file-input:focus {
+        outline: none;
+        box-shadow: 0 0 0 2px var(--color-primary-light);
+    }
+</style>
+}

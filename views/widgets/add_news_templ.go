@@ -47,17 +47,26 @@ func AddNewsForm() templ.Component {
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 3, "</div><form hx-ext=\"response-targets\" class=\"add_news-form\" hx-post=\"api/register\" hx-trigger=\"submit\" hx-target=\"#add_news-result\" hx-swap=\"innerHTML swap:0.5s\" hx-on::after-request=\"if(event.detail.successful) this.reset()\"><div class=\"add_news-form__inputs\">")
+		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 3, "</div><form hx-ext=\"response-targets, file-upload\" class=\"add_news-form\" hx-post=\"/api/news/create\" hx-trigger=\"submit\" hx-target=\"#add_news-result\" hx-swap=\"innerHTML swap:0.5s\" hx-encoding=\"multipart/form-data\" hx-on::after-request=\"if(event.detail.successful) this.reset()\"><div class=\"add_news-form__inputs\">")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		templ_7745c5c3_Err = components.Input(components.InputProps{Placeholder: "Заголовок", Name: "title"}).Render(ctx, templ_7745c5c3_Buffer)
+		templ_7745c5c3_Err = components.Input(components.InputProps{
+			Placeholder: "Заголовок",
+			Name:        "title",
+		}).Render(ctx, templ_7745c5c3_Buffer)
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		templ_7745c5c3_Err = components.Textarea(components.TextareaProps{
-			Placeholder: "Превью",
-			Name:        "preview",
+		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 4, "<!-- Добавлен компонент загрузки изображения -->")
+		if templ_7745c5c3_Err != nil {
+			return templ_7745c5c3_Err
+		}
+		templ_7745c5c3_Err = components.FileInput(components.FileInputProps{
+			Name:   "preview_image",
+			Accept: "image/png, image/jpeg",
+			Class:  "file-input",
+			Label:  "Превью",
 		}).Render(ctx, templ_7745c5c3_Buffer)
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
@@ -69,7 +78,7 @@ func AddNewsForm() templ.Component {
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 4, "</div><div class=\"add_news-form-button\">")
+		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 5, "</div><div class=\"add_news-form-button\">")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
@@ -85,7 +94,7 @@ func AddNewsForm() templ.Component {
 				}()
 			}
 			ctx = templ.InitializeContext(ctx)
-			templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 5, "<span class=\"add_news-form__submit\">Создать новость</span> <span class=\"add_news-form__loader\"></span>")
+			templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 6, "<span class=\"add_news-form__submit\">Создать новость</span> <span class=\"add_news-form__loader\"></span>")
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
@@ -95,7 +104,7 @@ func AddNewsForm() templ.Component {
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 6, "</div></form></div>")
+		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 7, "</div></form></div>")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
@@ -124,7 +133,7 @@ func AddNewsFormStyle() templ.Component {
 			templ_7745c5c3_Var3 = templ.NopComponent
 		}
 		ctx = templ.ClearChildren(ctx)
-		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 7, "<style>\n    .add_news-container {\n        max-width: 500px;\n        margin: 0 auto;\n        padding-top: 118px;\n        padding-bottom: 158px;\n        display: flex;\n        flex-direction: column;\n        align-items: center;\n    }\n\n    .add_news-form__title {\n        padding-bottom: 40px;\n        text-align: center;\n        width: 100%;\n    }\n\n    .add_news-form {\n        display: flex;\n        flex-direction: column;\n        width: 100%;\n        align-items: center;\n    }\n\n    .add_news-form__inputs {\n        display: flex;\n        flex-direction: column;\n        gap: 41px;\n        /* Вот здесь устанавливаем отступ 51px между полями */\n        width: 100%;\n        margin-bottom: 41px;\n        /* Добавляем отступ перед кнопкой */\n    }\n\n    .add_news-form-button {\n        width: 100%;\n        display: flex;\n        justify-content: center;\n    }\n\n    .form-group {\n        display: flex;\n        flex-direction: column;\n        gap: 5px;\n        width: 100%;\n        max-width: 400px;\n    }\n\n    .submit-button {\n        width: auto;\n        margin: 0 auto;\n    }\n\n    /* Стили для лоадера и других элементов */\n    .add_news-form__submit {\n        display: inline-block;\n    }\n\n    .htmx-request .add_news-form__submit {\n        display: none;\n    }\n\n    .add_news-form__loader {\n        display: none;\n    }\n\n    .htmx-request .add_news-form__loader {\n        display: block;\n        width: 24px;\n        height: 24px;\n        border: 2px solid #FFF;\n        border-radius: 50%;\n        position: relative;\n        box-sizing: border-box;\n        animation: rotation 1s linear infinite;\n        margin: 0 auto;\n    }\n\n    @keyframes rotation {\n        0% {\n            transform: rotate(0deg);\n        }\n\n        100% {\n            transform: rotate(360deg);\n        }\n    }\n</style>")
+		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 8, "<style>\n    .add_news-container {\n        max-width: 500px;\n        margin: 0 auto;\n        padding-top: 118px;\n        padding-bottom: 158px;\n        display: flex;\n        flex-direction: column;\n        align-items: center;\n    }\n\n    .add_news-form__title {\n        padding-bottom: 40px;\n        text-align: center;\n        width: 100%;\n    }\n\n    .add_news-form {\n        display: flex;\n        flex-direction: column;\n        width: 100%;\n        align-items: center;\n    }\n\n    .add_news-form__inputs {\n        display: flex;\n        flex-direction: column;\n        gap: 41px;\n        /* Вот здесь устанавливаем отступ 51px между полями */\n        width: 100%;\n        margin-bottom: 41px;\n        /* Добавляем отступ перед кнопкой */\n    }\n\n    .add_news-form-button {\n        width: 100%;\n        display: flex;\n        justify-content: center;\n    }\n\n    .form-group {\n        display: flex;\n        flex-direction: column;\n        gap: 5px;\n        width: 100%;\n        max-width: 400px;\n    }\n\n    .submit-button {\n        width: auto;\n        margin: 0 auto;\n    }\n\n    /* Стили для лоадера и других элементов */\n    .add_news-form__submit {\n        display: inline-block;\n    }\n\n    .htmx-request .add_news-form__submit {\n        display: none;\n    }\n\n    .add_news-form__loader {\n        display: none;\n    }\n\n    .htmx-request .add_news-form__loader {\n        display: block;\n        width: 24px;\n        height: 24px;\n        border: 2px solid #FFF;\n        border-radius: 50%;\n        position: relative;\n        box-sizing: border-box;\n        animation: rotation 1s linear infinite;\n        margin: 0 auto;\n    }\n\n    @keyframes rotation {\n        0% {\n            transform: rotate(0deg);\n        }\n\n        100% {\n            transform: rotate(360deg);\n        }\n    }\n</style>")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}

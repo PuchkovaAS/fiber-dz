@@ -1,10 +1,13 @@
 package news
 
-import "time"
+import (
+	"mime/multipart"
+	"time"
+)
 
 type newsCreateForm struct {
 	Title   string
-	Preview string
+	Preview *multipart.FileHeader
 	Text    string
 }
 
