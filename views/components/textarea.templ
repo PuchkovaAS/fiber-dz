@@ -1,0 +1,65 @@
+package components
+
+type TextareaProps struct {
+	Placeholder string
+	Name        string
+	Class       string // Дополнительные классы, если нужны
+}
+
+templ Textarea(props TextareaProps) {
+	@TextareaStyle()
+	<div class="textarea-box">
+		<div class="textarea-title">{ props.Placeholder }</div>
+		<textarea name={ props.Name } class={ "textarea " + props.Class }></textarea>
+	</div>
+}
+
+templ TextareaStyle() {
+	<style>
+    .textarea-box {
+        position: relative;
+        margin-top: 15px;
+        /* Space for the floating label */
+        text-align: left;
+        /* Выравнивание по левому краю */
+    }
+
+    .textarea-title {
+        font-size: var(--h5-font-size);
+        font-weight: var(--h5-font-weight);
+        color: var(--color-dark75);
+        position: absolute;
+        top: -25px;
+        left: 5px;
+        background: white;
+        text-align: left;
+        width: 100%;
+        /* Чтобы текст не переносился */
+    }
+
+    .textarea {
+        border-radius: 12px;
+        width: 488px;
+        min-height: 120px;
+        /* Минимальная высота */
+        background: var(--color-gray);
+        border: none;
+        padding: 12px 8px;
+        resize: vertical;
+        /* Разрешаем изменять размер только по вертикали */
+        font-family: inherit;
+        /* Наследуем шрифт */
+        font-size: 16px;
+        /* Размер шрифта */
+        line-height: 1.5;
+        /* Межстрочный интервал */
+    }
+
+    /* Для адаптивности */
+    @media (max-width: 600px) {
+        .textarea {
+            width: 100%;
+        }
+    }
+</style>
+}

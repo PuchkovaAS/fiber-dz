@@ -1,0 +1,90 @@
+package widgets
+
+import (
+	"fiber-dz/internal/news"
+	"fiber-dz/views/components"
+	"strings"
+)
+
+templ ArticleWidget(news news.News) {
+	@ArticleWidgetStyle()
+	<div class="article-container">
+		<div class="article-container__header">
+			<div class="article-container__title">
+				@components.Title(news.Title)
+			</div>
+			{{ img := strings.TrimPrefix(news.Preview, ".") }}
+			<div class="article-container__image" style={ "background-image: url(" + img + ")" }></div>
+		</div>
+		<div class="article-container__text">
+			{ news.Text }
+		</div>
+	</div>
+}
+
+templ ArticleWidgetStyle() {
+	<style>
+    .article-container {
+        max-width: 1128px;
+        width: 100%;
+        margin: 0 auto;
+        padding: 20px;
+        box-sizing: border-box;
+        font-family: var(--font-family);
+    }
+
+    .article-container__header {
+        width: 1126px;
+        max-width: 100%;
+        margin-bottom: 24px;
+    }
+
+    .article-container__title {
+        margin-bottom: 20px;
+    }
+
+    .article-container__image {
+        width: 1072px;
+        height: 528px;
+        max-width: 100%;
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+
+        border-radius: 8px;
+        margin-bottom: 12px;
+        align-self: center;
+    }
+
+    .article-container__text {
+        max-width: 1072px;
+        width: 100%;
+        margin: 0 auto;
+        line-height: 1.6;
+        font-size: 18px;
+        color: var(--color-black-75);
+    }
+
+    @media (max-width: 1200px) {
+        .article-container__image {
+            height: calc(528px * 0.8);
+        }
+    }
+
+    @media (max-width: 768px) {
+        .article-container__image {
+            height: calc(528px * 0.6);
+        }
+
+        .article-container__text {
+            font-size: 16px;
+        }
+    }
+
+    @media (max-width: 480px) {
+        .article-container__image {
+            height: calc(528px * 0.4);
+        }
+    }
+</style>
+}

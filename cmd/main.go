@@ -62,7 +62,8 @@ func main() {
 	authService := auth.NewAuthService(userRepository)
 
 	// handlers
-	pages.NewHandler(app, logger, newsRepository)
+	pages.NewHandler(app, logger, newsRepository, store)
 	auth.NewHandler(app, logger, *authService, store)
+	news.NewHandler(app, logger, store, *newsRepository)
 	app.Listen(":3000")
 }

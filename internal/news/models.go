@@ -1,6 +1,15 @@
 package news
 
-import "time"
+import (
+	"mime/multipart"
+	"time"
+)
+
+type newsCreateForm struct {
+	Title   string
+	Preview *multipart.FileHeader
+	Text    string
+}
 
 type News struct {
 	ID         int       `db:"id"`

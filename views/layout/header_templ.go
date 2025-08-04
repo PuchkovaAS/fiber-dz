@@ -65,13 +65,13 @@ func Header() templ.Component {
 			var templ_7745c5c3_Var2 string
 			templ_7745c5c3_Var2, templ_7745c5c3_Err = templ.JoinStringErrs(email)
 			if templ_7745c5c3_Err != nil {
-				return templ.Error{Err: templ_7745c5c3_Err, FileName: `views/layout/header.templ`, Line: 33, Col: 55}
+				return templ.Error{Err: templ_7745c5c3_Err, FileName: `views/layout/header.templ`, Line: 33, Col: 45}
 			}
 			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var2))
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
-			templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 4, "</span><div class=\"dropdown-menu\"><a class=\"menu_right-link\" hx-get=\"/api/profile\" hx-trigger=\"click\">Профиль</a> <a class=\"menu_right-link\" hx-get=\"/api/logout\" hx-trigger=\"click\">Выйти</a></div></div>")
+			templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 4, "</span><div class=\"dropdown-menu\"><a class=\"menu_right-link\" hx-get=\"/api/profile\" hx-trigger=\"click\">Профиль</a> <a class=\"menu_right-link\" hx-get=\"/api/logout\" hx-trigger=\"click\">Выйти</a> <a class=\"menu_right-link\" href=\"/create\">Создать новость</a></div></div>")
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
